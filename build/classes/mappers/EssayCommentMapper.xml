@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.handleMenuscript.mapper.EssayCommentMapper">
+	<!-- =============评语表=============== -->
+	<!-- essayCommentMap评语表 -->
+
+	<resultMap id="essayCommentMap" type="com.pxxy.handleMenuscript.bean.EssayInfo">
+		<id property="essayId" column="essayId" />
+		<result property="title" column="title" />
+		<result property="etitle" column="etitle" />
+		<result property="username" column="username" />
+		<result property="styleId" column="styleId" />
+		<result property="abstracts" column="abstracts" />
+		<result property="englishAbstract" column="englishAbstract" />
+		<result property="keywords" column="keywords" />
+		<result property="englishKeywords" column="englishKeywords" />
+		<result property="contributor" column="contributor" />
+		<result property="contributeDate" column="contributeDate" />
+		<result property="contentUrl" column="contentUrl" />
+		<result property="statusId" column="statusId" />
+		<result property="isContribute" column="isContribute" />
+		<result property="reference" column="reference" />
+		<!-- <result property="finishDate" column="finishDate"/> -->
+		<result property="finishDate" column="finishDate" />
+		<association property="essayStyle"
+			javaType="com.pxxy.handleMenuscript.bean.EssayStyle">
+			<id property="styleId" column="styleId" />
+			<result property="styleName" column="styleName" />
+		</association>
+		<!-- 稿件留言一比一 -->
+		<association property="lMessage"
+			javaType="com.pxxy.handleMenuscript.bean.LeaveMessage">
+			<id column="leaveMessageId" property="leaveMessageId"></id>
+			<result column="essayId" property="essayId"></result>
+			<result column="username" property="username"></result>
+			<result column="lMessageContent" property="lMessageContent"></result>
+			<result column="lMessageTime" property="lMessageTime"></result>
+			<result column="lMessageState" property="lMessageState"></result>
+		</association>
+		<!-- 基金表 -->
+		<collection property="fundList" ofType="com.pxxy.handleMenuscript.bean.Fund">
+			<id column="fundId" property="fundId"></id>
+			<result column="essayId" property="essayId"></result>
+			<result column="fundLevel" property="fundLevel"></result>
+			<result column="fundCName" property="fundCName"></result>
+			<result column="fundEName" property="fundEName"></result>
+			<result column="fundNumber" property="fundNumber"></result>
+			<result column="fundPs" property="fundPs"></result>
+		</collection>
+
+		<!-- 稿件评审表一对多 -->
+		<collection property="eCommentList"
+			ofType="com.pxxy.handleMenuscript.bean.EssayComment">
+			<id column="commentId" property="commentId"></id>
+			<result column="essayId" property="essayId"></result>
+			<result column="cUsernameId" property="cUsernameId"></result>
+			<result column="designCommentId" property="designCommentId"></result>
+			<result column="contentCommentId" property="contentCommentId"></result>
+			<result column="dataCommentId" property="dataCommentId"></result>
+			<result column="discussCommentId" property="discussCommentId"></result>
+			<result column="resultCommentId" property="resultCommentId"></result>
+			<result column="commentDetails" property="commentDetails"></result>
+			<result column="commentLevel" property="commentLevel"></result>
+			<result column="commentDate" property="commentDate"></result>
+			<!-- 评审内容 -->
+			<!-- 设计评语表一对一designComment -->
+			<association property="designComment"
+				javaType="com.pxxy.handleMenuscript.bean.DesignComment">
+				<id property="designCommentId" column="designCommentId" />
+				<result property="designType" column="designType" />
+			</association>
+			<!-- 内容评语表一对一contentComment -->
+			<association property="contentComment"
+				javaType="com.pxxy.handleMenuscript.bean.ContentComment">
+				<id property="contentCommentId" column="contentCommentId" />
+				<result property="contentType" column="contentType" />
+			</association>
+			<!-- 数据评语表一对一dataComment -->
+			<association property="dataComment"
+				javaType="com.pxxy.handleMenuscript.bean.DataComment">
+				<id property="dataCommentId" column="contentCommentId" />
+				<result property="dataCommentType" column="dataCommentType" />
+			</association>
+			<!-- 讨论评语表一对一discussComment -->
+			<association property="discussComment"
+				javaType="com.pxxy.handleMenuscript.bean.DiscussComment">
+				<id property="discussCommentId" column="discussCommentId" />
+				<result property="discussCommentType" column="discussCommentType" />
+			</association>
+			<!-- 结果评语表一对一resultComment -->
+			<association property="resultComment"
+				javaType="com.pxxy.handleMenuscript.bean.ResultComment">
+				<id property="resultCommentId" column="resultCommentId" />
+				<result property="resultCommentType" column="resultCommentType" />
+			</association>
+		</collection>
+	</resultMap>
+
+	<!-- 查询所有已分配稿件稿件审核情况 -->
+	<!-- 查询稿件评语信息 -->
+	<select id="selectECommentById" resultMap="essayCommentMap">
+		SELECT
+		tb_essay_info.*,
+		tb_essay_comment.*,
+		tb_essay_designcomment.designType,
+		tb_essay_contentcomment.contentType,
+		tb_essay_datacomment.dataCommentType,
+		tb_essay_discusscomment.discussCommentType,
+		tb_resultcomment.resultCommentType
+		FROM tb_essay_info
+		LEFT JOIN
+		tb_essay_comment
+		ON tb_essay_info.essayId=tb_essay_comment.essayId
+		LEFT
+		JOIN
+		tb_essay_designcomment
+		ON
+		tb_essay_comment.designCommentId=tb_essay_designcomment.designCommentId
+		LEFT JOIN tb_essay_contentcomment
+		ON
+		tb_essay_comment.contentCommentId=tb_essay_contentcomment.contentCommentId
+		LEFT JOIN tb_essay_datacomment
+		ON
+		tb_essay_comment.dataCommentId=tb_essay_datacomment.dataCommentId
+		LEFT
+		JOIN tb_essay_discusscomment
+		ON
+		tb_essay_comment.discussCommentId=tb_essay_discusscomment.discussCommentId
+		LEFT JOIN tb_resultcomment
+		ON
+		tb_essay_comment.resultCommentId=tb_resultcomment.resultCommentId
+		WHERE tb_essay_comment.essayId=#{essayId}
+
+	</select>
+
+	<!-- 加载评语信息commentMap -->
+	<resultMap id="commentMap" type="com.pxxy.handleMenuscript.bean.EssayComment">
+		<id column="commentId" property="commentId"></id>
+		<result column="essayId" property="essayId"></result>
+		<result column="cUsernameId" property="cUsernameId"></result>
+		<result column="designCommentId" property="designCommentId"></result>
+		<result column="contentCommentId" property="contentCommentId"></result>
+		<result column="dataCommentId" property="dataCommentId"></result>
+		<result column="discussCommentId" property="discussCommentId"></result>
+		<result column="resultCommentId" property="resultCommentId"></result>
+		<result column="commentDetails" property="commentDetails"></result>
+		<result column="commentLevel" property="commentLevel"></result>
+		<result column="commentDate" property="commentDate"></result>
+		<!-- 评审内容 -->
+		<!-- 设计评语表一对一designComment -->
+		<association property="designComment"
+			javaType="com.pxxy.handleMenuscript.bean.DesignComment">
+			<id property="designCommentId" column="designCommentId" />
+			<result property="designType" column="designType" />
+		</association>
+		<!-- 内容评语表一对一contentComment -->
+		<association property="contentComment"
+			javaType="com.pxxy.handleMenuscript.bean.ContentComment">
+			<id property="contentCommentId" column="contentCommentId" />
+			<result property="contentType" column="contentType" />
+		</association>
+		<!-- 数据评语表一对一dataComment -->
+		<association property="dataComment"
+			javaType="com.pxxy.handleMenuscript.bean.DataComment">
+			<id property="dataCommentId" column="contentCommentId" />
+			<result property="dataCommentType" column="dataCommentType" />
+		</association>
+		<!-- 讨论评语表一对一discussComment -->
+		<association property="discussComment"
+			javaType="com.pxxy.handleMenuscript.bean.DiscussComment">
+			<id property="discussCommentId" column="discussCommentId" />
+			<result property="discussCommentType" column="discussCommentType" />
+		</association>
+		<!-- 结果评语表一对一resultComment -->
+		<association property="resultComment"
+			javaType="com.pxxy.handleMenuscript.bean.ResultComment">
+			<id property="resultCommentId" column="resultCommentId" />
+			<result property="resultCommentType" column="resultCommentType" />
+		</association>
+
+	</resultMap>
+	<!-- 加载评语信息 -->
+	<select id="selectComment" resultMap="commentMap">
+		SELECT
+		tb_essay_comment.*,
+		tb_essay_designcomment.designType,
+		tb_essay_contentcomment.contentType,
+		tb_essay_datacomment.dataCommentType,
+		tb_essay_discusscomment.discussCommentType,
+		tb_resultcomment.resultCommentType
+		FROM tb_essay_comment
+
+		LEFT JOIN
+		tb_essay_designcomment
+		ON
+		tb_essay_comment.designCommentId=tb_essay_designcomment.designCommentId
+		LEFT JOIN tb_essay_contentcomment
+		ON
+		tb_essay_comment.contentCommentId=tb_essay_contentcomment.contentCommentId
+		LEFT JOIN tb_essay_datacomment
+		ON
+		tb_essay_comment.dataCommentId=tb_essay_datacomment.dataCommentId
+		LEFT
+		JOIN tb_essay_discusscomment
+		ON
+		tb_essay_comment.discussCommentId=tb_essay_discusscomment.discussCommentId
+		LEFT JOIN tb_resultcomment
+		ON
+		tb_essay_comment.resultCommentId=tb_resultcomment.resultCommentId
+
+	</select>
+	
+
+
+
+
+
+	<!-- 添加评价信息 -->
+	<insert id="insertEssayComment" parameterType="com.pxxy.handleMenuscript.bean.EssayComment">
+		INSERT into tb_essay_comment
+		<set>
+			<if test="commentId != null">
+				commentId=#{commentId},
+			</if>
+			<if test="essayId != null">
+				essayId=#{essayId},
+			</if>
+			<if test="cUsernameId != null">
+				cUsernameId=#{cUsernameId},
+			</if>
+			<if test="designCommentId != null">
+				designCommentId=#{designCommentId},
+			</if>
+			<if test="contentCommentId != null">
+				contentCommentId=#{contentCommentId},
+			</if>
+			<if test="dataCommentId != null">
+				dataCommentId=#{dataCommentId},
+			</if>
+			<if test="discussCommentId != null">
+				discussCommentId=#{discussCommentId},
+			</if>
+			<if test="resultCommentId != null">
+				resultCommentId=#{resultCommentId},
+			</if>
+			<if test="commentDetails != null">
+				commentDetails=#{commentDetails},
+			</if>
+			<if test="commentLevel != null and commentLevel !=''" >
+				commentLevel=#{commentLevel},
+			</if>
+			<if test="commentDate != null">
+				commentDate=#{commentDate}
+			</if>
+		</set>
+	</insert>
+	<!-- essayId所有稿件评语 -->
+	
+	<!-- 编辑员查询稿件详情 -->
+	<select id="selectCommentDetailsById" resultMap="commentMap">
+		SELECT
+		tb_essay_comment.*,
+		tb_essay_designcomment.designType,
+		tb_essay_contentcomment.contentType,
+		tb_essay_datacomment.dataCommentType,
+		tb_essay_discusscomment.discussCommentType,
+		tb_resultcomment.resultCommentType
+		FROM tb_essay_comment
+
+		LEFT JOIN
+		tb_essay_designcomment
+		ON
+		tb_essay_comment.designCommentId=tb_essay_designcomment.designCommentId
+		LEFT JOIN tb_essay_contentcomment
+		ON
+		tb_essay_comment.contentCommentId=tb_essay_contentcomment.contentCommentId
+		LEFT JOIN tb_essay_datacomment
+		ON
+		tb_essay_comment.dataCommentId=tb_essay_datacomment.dataCommentId
+		LEFT
+		JOIN tb_essay_discusscomment
+		ON
+		tb_essay_comment.discussCommentId=tb_essay_discusscomment.discussCommentId
+		LEFT JOIN tb_resultcomment
+		ON
+		tb_essay_comment.resultCommentId=tb_resultcomment.resultCommentId
+		
+		WHERE tb_essay_comment.commentId=#{commentId}
+		
+	</select>
+	<!-- 专家查询稿件评语详情 -->
+	<select id="selectCommentDetails" resultMap="commentMap">
+		SELECT
+		tb_essay_comment.*,
+		tb_essay_designcomment.designType,
+		tb_essay_contentcomment.contentType,
+		tb_essay_datacomment.dataCommentType,
+		tb_essay_discusscomment.discussCommentType,
+		tb_resultcomment.resultCommentType
+		FROM tb_essay_comment
+
+		LEFT JOIN
+		tb_essay_designcomment
+		ON
+		tb_essay_comment.designCommentId=tb_essay_designcomment.designCommentId
+		LEFT JOIN tb_essay_contentcomment
+		ON
+		tb_essay_comment.contentCommentId=tb_essay_contentcomment.contentCommentId
+		LEFT JOIN tb_essay_datacomment
+		ON
+		tb_essay_comment.dataCommentId=tb_essay_datacomment.dataCommentId
+		LEFT
+		JOIN tb_essay_discusscomment
+		ON
+		tb_essay_comment.discussCommentId=tb_essay_discusscomment.discussCommentId
+		LEFT JOIN tb_resultcomment
+		ON
+		tb_essay_comment.resultCommentId=tb_resultcomment.resultCommentId
+		
+		WHERE tb_essay_comment.essayId=#{essayId}
+		
+		AND tb_essay_comment.cUsernameId=#{cUsernameId}
+	</select>
+	<!-- 更新稿件评语 -->
+	<update id="updateEssayCommentById" parameterType="com.pxxy.handleMenuscript.bean.EssayComment">
+		update tb_essay_comment
+		<set>
+			<!-- <if test="commentId != null"> commentId=#{commentId}, </if> -->
+			<if test="essayId != null">
+				essayId=#{essayId},
+			</if>
+			<if test="designCommentId != null">
+				designCommentId=#{designCommentId},
+			</if>
+			<if test="contentCommentId != null">
+				contentCommentId=#{contentCommentId},
+			</if>
+			<if test="dataCommentId != null">
+				dataCommentId=#{dataCommentId},
+			</if>
+			<if test="discussCommentId != null">
+				discussCommentId=#{discussCommentId},
+			</if>
+			<if test="resultCommentId != null">
+				resultCommentId=#{resultCommentId},
+			</if>
+			<if test="commentDetails != null">
+				commentDetails=#{commentDetails},
+			</if>
+			<if test="commentLevel != null">
+				commentLevel=#{commentLevel},
+			</if>
+			<if test="commentDate != null">
+				commentDate=#{commentDate}
+			</if>
+		</set>
+		WHERE tb_essay_comment.commentId=#{commentId}
+	</update>
+	
+</mapper>

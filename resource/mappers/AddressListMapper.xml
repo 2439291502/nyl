@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.handleMenuscript.mapper.AddressListMapper">
+	<!-- 添加 -->
+	<insert id="insertAList" parameterType="com.pxxy.handleMenuscript.bean.AddressList">
+		INSERT into tb_address_list
+		<set>
+			<if test="aListId != null">
+				aListId=#{aListId},
+			</if>
+			<if test="userId != null">
+				userId=#{userId},
+			</if>
+			<if test="tureName != null">
+				tureName=#{tureName},
+			</if>
+			<if test="email != null">
+				email=#{email},
+			</if>
+			<if test="phone != null">
+				phone=#{phone},
+			</if>
+			<if test="profession != null">
+				profession=#{profession},
+			</if>
+			<if test="research != null">
+				research=#{research},
+			</if>
+			<if test="postId != null">
+				postId=#{postId},
+			</if>
+			<if test="workUnit != null">
+				workUnit=#{workUnit},
+			</if>
+			<if test="address != null">
+				address=#{address},
+			</if>
+			<if test="postcode != null">
+				postcode=#{postcode},
+			</if>
+			<if test="createData != null">
+				createData=#{createData},
+			</if>
+		</set>
+	</insert>
+	<select id="selectAListById" resultType="com.pxxy.handleMenuscript.bean.AddressList">
+		SELECT * FROM tb_address_list WHERE aListId=#{aListId}
+	</select>
+	
+</mapper>
+	

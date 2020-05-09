@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.handleMenuscript.mapper.UserInfoMapper">
+	<resultMap id="userInfoMap" type="com.pxxy.handleMenuscript.bean.UserInfo">
+		<id property="userId" column="userId"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="tureName" column="tureName"/>
+		<result property="email" column="email"/>
+		<result property="sex" column="sex"/>
+		<result property="profession" column="profession"/>
+		<result property="research" column="research"/>
+		<result property="postId" column="postId"/>
+		<result property="eBackgroundId" column="eBackgroundId"/>
+		<result property="workUnit" column="workUnit"/>
+		<result property="address" column="address"/>
+		<result property="postcode" column="postcode"/>
+		<result property="phone" column="phone"/>
+		<result property="telephone" column="telephone"/>
+		<result property="applyExpert" column="applyExpert"/>
+		<result property="createData" column="createData"/>
+		<result property="updateDate" column="updateDate"/>
+		<result property="typeId" column="typeId"/>
+		<result property="state" column="state"/>
+		<!-- 学历 -->
+		<association property="eBackground" javaType="com.pxxy.handleMenuscript.bean.EBackground">
+			<id property="eBackgroundId" column="eBackgroundId"/>
+			<result property="eBackgroundName" column="eBackgroundName"/>
+		</association>
+		<!-- 职称 -->
+		<association property="post" javaType="com.pxxy.handleMenuscript.bean.Post">
+			<id property="postId" column="postId"/>
+			<result property="postName" column="postName"/>
+		</association>
+		<!-- 用户类型 -->
+		<association property="type" javaType="com.pxxy.handleMenuscript.bean.Type">
+			<id property="typeId" column="typeId"/>
+			<result property="typeLevel" column="typeLevel"/>
+		</association>
+		
+	</resultMap>
+
+	<!-- 通过用户名查询用户 登录 -->
+	<select id="selectUserByUsername" parameterType="java.lang.String"
+		resultMap="userInfoMap">
+		SELECT 
+		tb_user_info.*,
+		tb_user_type.*,
+		tb_user_post.*,
+		tb_user_educatebackground.* 
+		FROM tb_user_info
+		
+		LEFT JOIN tb_user_type
+		ON tb_user_info.typeId=tb_user_type.typeId
+		LEFT JOIN tb_user_post
+		ON tb_user_info.postId=tb_user_post.postId
+		LEFT JOIN tb_user_educatebackground
+		ON tb_user_info.eBackgroundId=tb_user_educatebackground.eBackgroundId
+		WHERE tb_user_info.username=#{username}
+	</select>
+	
+	<!-- 通过用户Id查询用户 登录 -->
+	<select id="selectUserById" parameterType="java.lang.String"
+		resultMap="userInfoMap">
+		SELECT 
+		tb_user_info.*,
+		tb_user_type.*,
+		tb_user_post.*,
+		tb_user_educatebackground.* 
+		FROM tb_user_info
+		
+		LEFT JOIN tb_user_type
+		ON tb_user_info.typeId=tb_user_type.typeId
+		LEFT JOIN tb_user_post
+		ON tb_user_info.postId=tb_user_post.postId
+		LEFT JOIN tb_user_educatebackground
+		ON tb_user_info.eBackgroundId=tb_user_educatebackground.eBackgroundId
+		WHERE userId=#{userId}
+	</select>
+
+	<!--注册 -->
+	<insert id="insertUser" parameterType="com.pxxy.handleMenuscript.bean.UserInfo">
+		INSERT into tb_user_info
+		<set>
+			<if test="userId != null">
+				userId=#{userId},
+			</if>
+			<if test="username != null">
+				username=#{username},
+			</if>
+			<if test="password != null">
+				password=#{password},
+			</if>
+			<if test="tureName != null">
+				tureName=#{tureName},
+			</if>
+			<if test="email != null">
+				email=#{email},
+			</if>
+			<if test="sex != null">
+				sex=#{sex},
+			</if>
+			<if test="profession != null">
+				profession=#{profession},
+			</if>
+			<if test="research != null">
+				research=#{research},
+			</if>
+			<if test="postId != null">
+				postId=#{postId},
+			</if>
+			<if test="eBackgroundId != null">
+				eBackgroundId=#{eBackgroundId},
+			</if>
+
+			<if test="workUnit != null">
+				workUnit=#{workUnit},
+			</if>
+			<if test="address != null">
+				address=#{address},
+			</if>
+			<if test="postcode != null">
+				postcode=#{postcode},
+			</if>
+			<if test="phone != null">
+				phone=#{phone},
+			</if>
+			<if test="telephone != null">
+				telephone=#{telephone},
+			</if>
+			<if test="applyExpert != null">
+				applyExpert=#{applyExpert},
+			</if>
+			<if test="createData != null">
+				createData=#{createData},
+			</if>
+			<if test="updateDate != null">
+				updateDate=#{updateDate},
+			</if>
+			<if test="typeId != null">
+				typeId=#{typeId},
+			</if>
+			<if test="state != null">
+				state=#{state}
+			</if>
+		</set>
+	</insert>
+
+	<!-- 更新用户信息 -->
+	<update id="updateUserInfo" parameterType="com.pxxy.handleMenuscript.bean.UserInfo">
+		UPDATE tb_user_info
+		<set>
+			<if test="username != null">
+				username=#{username},
+			</if>
+			<if test="password != null">
+				password=#{password},
+			</if>
+			<if test="tureName != null">
+				tureName=#{tureName},
+			</if>
+			<if test="email != null">
+				email=#{email},
+			</if>
+			<if test="sex != null">
+				sex=#{sex},
+			</if>
+			<if test="profession != null">
+				profession=#{profession},
+			</if>
+			<if test="research != null">
+				research=#{research},
+			</if>
+			<if test="postId != null">
+				postId=#{postId},
+			</if>
+			<if test="eBackgroundId != null">
+				eBackgroundId=#{eBackgroundId},
+			</if>
+
+			<if test="workUnit != null">
+				workUnit=#{workUnit},
+			</if>
+			<if test="address != null">
+				address=#{address},
+			</if>
+			<if test="postcode != null">
+				postcode=#{postcode},
+			</if>
+			<if test="phone != null">
+				phone=#{phone},
+			</if>
+			<if test="telephone != null">
+				telephone=#{telephone},
+			</if>
+			<if test="applyExpert != null">
+				applyExpert=#{applyExpert},
+			</if>
+			<if test="createData != null">
+				createData=#{createData},
+			</if>
+			<if test="updateDate != null">
+				updateDate=#{updateDate},
+			</if>
+			<if test="typeId != null">
+				typeId=#{typeId},
+			</if>
+			<if test="state != null">
+				state=#{state}
+			</if>
+		</set>
+		WHERE userId=#{userId}
+	</update>
+	<!-- 根据用户编号修改用户信息 -->
+	<update id="updateUserByUsername" parameterType="com.pxxy.handleMenuscript.bean.UserInfo">
+		update tb_user_info
+		<set>
+			<if test="username != null">
+				username=#{username},
+			</if>
+			<if test="password != null">
+				password=#{password},
+			</if>
+			<if test="tureName != null">
+				tureName=#{tureName},
+			</if>
+			<if test="email != null">
+				email=#{email},
+			</if>
+			<if test="sex != null">
+				sex=#{sex},
+			</if>
+			<if test="profession != null">
+				profession=#{profession},
+			</if>
+			<if test="research != null">
+				research=#{research},
+			</if>
+			<if test="postId != null">
+				postId=#{postId},
+			</if>
+			<if test="eBackgroundId != null">
+				eBackgroundId=#{eBackgroundId},
+			</if>
+
+			<if test="workUnit != null">
+				workUnit=#{workUnit},
+			</if>
+			<if test="address != null">
+				address=#{address},
+			</if>
+			<if test="postcode != null">
+				postcode=#{postcode},
+			</if>
+			<if test="phone != null">
+				phone=#{phone},
+			</if>
+			<if test="telephone != null">
+				telephone=#{telephone},
+			</if>
+			<if test="applyExpert != null">
+				applyExpert=#{applyExpert},
+			</if>
+			<if test="createData != null">
+				createData=#{createData},
+			</if>
+			<if test="updateDate != null">
+				updateDate=#{updateDate},
+			</if>
+			<if test="typeId != null">
+				typeId=#{typeId},
+			</if>
+			<if test="state != null">
+				state=#{state}
+			</if>
+		</set>
+		WHERE username=#{username}
+	</update>
+	<select id="selectUsersByUsername" parameterType="java.lang.String"
+		resultMap="userInfoMap">
+		SELECT 
+		tb_user_info.*,
+		tb_user_type.*,
+		tb_user_post.*,
+		tb_user_educatebackground.* 
+		FROM tb_user_info
+		
+		LEFT JOIN tb_user_type
+		ON tb_user_info.typeId=tb_user_type.typeId
+		LEFT JOIN tb_user_post
+		ON tb_user_info.postId=tb_user_post.postId
+		LEFT JOIN tb_user_educatebackground
+		ON tb_user_info.eBackgroundId=tb_user_educatebackground.eBackgroundId
+		<where>
+			<if test="username!=null and username!=''">
+				AND tb_user_info.username like '%${username}%'
+			</if>
+		</where>
+	</select>
+
+
+
+
+
+
+
+
+	<!-- ===================编辑对用户表的操作处理=============== -->
+	<!-- 查询所有的用户（作者、专家、编辑管理员）或模糊条件查询用户 -->
+	<select id="selectAllUsers" resultMap="userInfoMap">
+		SELECT 
+		tb_user_info.*,
+		tb_user_type.*,
+		tb_user_post.*,
+		tb_user_educatebackground.* 
+		FROM tb_user_info
+		
+		LEFT JOIN tb_user_type
+		ON tb_user_info.typeId=tb_user_type.typeId
+		LEFT JOIN tb_user_post
+		ON tb_user_info.postId=tb_user_post.postId
+		LEFT JOIN tb_user_educatebackground
+		ON tb_user_info.eBackgroundId=tb_user_educatebackground.eBackgroundId
+		
+	</select>
+	<!-- 查询待激活的用户||模糊条件查询用户 -->
+	<select id="selectState"  resultMap="userInfoMap">
+		SELECT 
+		tb_user_info.*,
+		tb_user_type.*,
+		tb_user_post.*,
+		tb_user_educatebackground.* 
+		FROM tb_user_info
+		
+		LEFT JOIN tb_user_type
+		ON tb_user_info.typeId=tb_user_type.typeId
+		LEFT JOIN tb_user_post
+		ON tb_user_info.postId=tb_user_post.postId
+		LEFT JOIN tb_user_educatebackground
+		ON tb_user_info.eBackgroundId=tb_user_educatebackground.eBackgroundId
+		WHERE tb_user_info.state=#{state}
+		<!-- <where>
+			<if test="username!=null and username!=''">
+				AND tb_user_info.username like '%${username}%'
+			</if>
+			
+				AND tb_user_info.state=#{state}
+		
+		</where> -->
+	</select>
+	
+	<!-- =============用户批量处理=============== -->
+	<!-- 批量更改用户激活状态 -->
+	<update id="activeUsers" parameterType="String">
+		UPDATE tb_user_info SET state = 1 where userId in
+		<foreach collection="array" item="userId" open="(" separator=","
+			close=")">
+			#{userId}
+		</foreach>
+	</update>
+	<!-- 冻结用户 -->
+	<update id="freezeUsers" parameterType="String">
+		UPDATE tb_user_info SET state = 0 where userId in
+		<foreach collection="array" item="userId" open="(" separator=","
+			close=")">
+			#{userId}
+		</foreach>
+	</update>
+	<!-- 批量删除 -->
+	<delete id="deleteUsers" parameterType="Integer">
+		delete from tb_user where userId in
+		<foreach collection="array" item="userId" open="(" separator=","
+			close=")">
+			#{userId}
+		</foreach>
+	</delete>
+
+</mapper>

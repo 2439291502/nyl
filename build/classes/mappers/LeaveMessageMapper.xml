@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.handleMenuscript.mapper.LeaveMessageMapper">
+
+	<!-- 添加留言 -->
+	<insert id="insertLeaveMessage" parameterType="com.pxxy.handleMenuscript.bean.LeaveMessage">
+		INSERT INTO tb_leaveMessage
+		<set>
+			<if test="leaveMessageId != null">
+				leaveMessageId=#{leaveMessageId},
+			</if>
+			<if test="essayId != null">
+				essayId=#{essayId},
+			</if>
+			<if test="username != null">
+				username=#{username},
+			</if>
+			<if test="toUsername != null">
+				toUsername=#{toUsername},
+			</if>
+			<if test="lMessageContent != null">
+				lMessageContent=#{lMessageContent},
+			</if>
+			<if test="lMessageTime != null">
+				lMessageTime=#{lMessageTime},
+			</if>
+			<if test="lMessageState != null">
+				lMessageState=#{lMessageState},
+			</if>
+		</set>
+	</insert>
+	<!-- 查询作者、专家查询其所有稿件状态留言信息 发件消息-->
+	<select id="selectLMessageByUsernameAState" resultType="com.pxxy.handleMenuscript.bean.LeaveMessage">
+		SELECT *
+		FROM tb_leaveMessage
+		WHERE username=#{username}
+		AND
+		lMessageState=#{lMessageState}
+	</select>
+	<!-- 查询收件消息 -->
+	<select id="selectGetLMessage" resultType="com.pxxy.handleMenuscript.bean.LeaveMessage">
+		SELECT *
+		FROM tb_leaveMessage
+		WHERE toUsername=#{toUsername}
+		AND
+		lMessageState=#{lMessageState}
+	</select>
+	<select id="selectLMessageById" parameterType="java.lang.String"
+		resultType="com.pxxy.handleMenuscript.bean.LeaveMessage">
+		SELECT * FROM tb_leaveMessage
+		WHERE
+		leaveMessageId=#{leaveMessageId}
+	</select>
+	
+	<!-- 编辑 查询留言消息 -->
+	<select id="selectLMessageByState" resultType="com.pxxy.handleMenuscript.bean.LeaveMessage">
+		SELECT *
+		FROM
+		tb_leaveMessage
+		WHERE lMessageState=#{lMessageState}
+	</select>
+	<select id="selectLMessageByEssayId" resultType="com.pxxy.handleMenuscript.bean.LeaveMessage">
+		SELECT *
+		FROM
+		tb_leaveMessage
+		WHERE essayId=#{essayId}
+	</select>
+
+
+
+	<delete id="deleteLMessageById" parameterType="java.lang.String">
+		delete from
+		tb_leaveMessage where leaveMessageId=#{leaveMessageId}
+	</delete>
+	<update id="updateLMessageById">
+		UPDATE tb_leaveMessage
+		<set>
+			<if test="leaveMessageId != null">
+				leaveMessageId=#{leaveMessageId},
+			</if>
+			<if test="essayId != null">
+				essayId=#{essayId},
+			</if>
+			<if test="username != null">
+				username=#{username},
+			</if>
+			<if test="lMessageContent != null">
+				lMessageContent=#{lMessageContent},
+			</if>
+			<if test="lMessageTime != null">
+				lMessageTime=#{lMessageTime},
+			</if>
+			<if test="lMessageState != null">
+				lMessageState=#{lMessageState},
+			</if>
+		</set>
+		WHERE leaveMessageId=#{leaveMessageId}
+	</update>
+
+</mapper>

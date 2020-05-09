@@ -1,0 +1,229 @@
+@charset "UTF-8";
+.*{
+	padding:0 px;
+	margin:0px;
+	font-family:Arial,Sans-Serif;
+	font-size:12px;
+	}
+
+.index_container {
+	height: auto;
+	width: auto;
+	background: #fff;
+	overflow: hidden;
+	padding-top: 16px;
+}
+
+.index_main {
+	width: 986px;
+	height: auto;
+	margin: 0 auto;
+	position: relative;
+}
+
+.index_title {
+	width: inherit;
+	height: 98px;
+	background: url(../img/blue/index/index_title_bg.jpg) repeat-x;
+}
+
+.index_title_left {
+	width: inherit;
+	height: inherit;
+	background: url(../../img/login/index_title_left.jpg) no-repeat;
+}
+
+.index_title_right {
+	width: inherit;
+	height: 98px;
+	background: url(../../img/login/index_title_right.jpg) no-repeat top
+		right;
+}
+
+.index_title h1 {
+	width: 898px;
+	height: 46px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-family: Arial, Sans-Serif;
+	padding: 0 0 0 88px;
+	padding-top: 0px;
+	letter-spacing: 0.1em;
+	text-shadow: 0 1px 0 #FFF;
+	font-size: 24px;
+	padding-top: 52px;
+	background: #e5e3f1;
+	-moz-border-radius: 5px;
+}
+
+.index_title h1 span {
+	font-size: 24px;
+}
+
+.index_nav_left {
+	background: #98a8d2;
+	width: inherit;
+	height: 36px;
+}
+
+.index_nav ul {
+	background: #98a8d2;
+	float: right;
+	width: 597px;
+	height: 36px;
+	margin-top: 0px;
+}
+
+.index_nav ul li {
+	width: 96px;
+	height: 32px;
+	line-height: 32px;
+	font-size: 12px;
+	text-align: center;
+	background: #98a8d2;
+	list-style: none;
+}
+
+.index_container ul li {
+	float: left;
+	border-right: 1px solid #DBDBDB;
+}
+
+.index_nav ul li a {
+	display: block;
+	color: #FFF;
+	text-decoration: none;
+	letter-spacing: 0.1em;
+}
+
+.index_nav ul li a:hover {
+	background:#d9e1f5;
+}
+
+.index_login {
+	width: inherit;
+	height: auto;
+	background: url(../../img/login/index_login_bg.jpg) repeat-y;
+}
+
+.index_login table td {
+	line-height: 35px;
+	padding-right: 8px;
+}
+
+.index_login table td .input_button {
+	width: 80px;
+	height: 30px;
+	margin-right: 8px;
+	font-size: 16px;
+	background-color: #A9B4BC;
+	cursor: pointer;
+}
+
+.index_login table td .input_button:hover {
+	background-color: #C6E2FF;
+}
+
+.index_noise {
+	width: inherit;
+	height: 349px;
+	background: url(../../img/login/index_noise_bg.jpg) no-repeat;
+}
+
+.index_noise_left {
+	width: 33%;
+	height: 349px;
+	float: left;
+}
+
+.journal_surface {
+	width: 204px;
+	height: 279px;
+	position: relative;
+	right: -84px;
+	top: -59px;
+	padding-left: 5px;
+}
+
+.index_noise_center {
+	width: 33%;
+	height: 307px;
+	float: left;
+	padding-top: 42px;
+}
+
+.index_noise_center table {
+	margin: 0 auto;
+}
+
+.index_noise_center table tr td {
+	height: 43px;
+	margin-bottom: 1px;
+	line-height: 20px;
+	font-size: 12px;
+}
+
+.index_noise_right {
+	width: 33%;
+	height: 300px;
+	float: left;
+	padding-top: 20px;
+	font-size: 12px;
+}
+
+.IndexPageTipScrollCss {
+	float: left;
+	height: 185px;
+	width: 285px;
+	padding: 0 0 0 0;
+	color: #333;
+	overflow: hidden;
+}
+
+.IndexPageTipScrollCss .show {
+	width: 220px;
+	min-height: 25px;
+	line-height: 25px;
+	overflow: hidden;
+	padding-left: 25px;
+}
+
+.show li {
+	line-height: 25px;
+}
+
+/*工作空间底部*/
+.foot {
+	width: 1200px;
+	height: 74px;
+	clear: both;
+	float: left;
+	overflow: hidden;
+	text-align: center;
+}
+
+.footCtrl {
+	line-height: 49px;
+	color: #09c;
+}
+
+.footCtrl a {
+	margin: 0 5px;
+	color: #09c;
+	text-decoration: none;
+	padding: 0;
+	outline: none;
+}
+
+.copy {
+	height: auto;
+	line-height: 25px;
+	color: #666;
+	background: url(../img/foot.jpg) repeat-x;
+}
+
+.copy a {
+	margin: 0 5px;
+	color: #06f;
+	text-decoration: none;
+}

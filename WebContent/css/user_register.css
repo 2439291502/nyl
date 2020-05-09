@@ -1,0 +1,94 @@
+ * {
+ 	margin: 0px;
+ 	padding: 0px;
+ }
+ 
+ body {
+ 	height: 100%;
+ 	border-color: gray;
+ }
+ 
+ .register_box {
+ 	width: 1344px;
+ 	height: 1230px;
+ 	background-color: #ffffff;
+ }
+ 
+ .register_title {
+ 	width: 1344px;
+ 	height: 40px;
+ 	background-color: #307792;
+ }
+ 
+ .span_title {
+ 	font-size: 14px;
+ 	font-weight: bold;
+ 	color: #fff;
+ 	padding: 2px;
+ }
+ 
+ .register_content {
+ 	width: 1320px;
+ 	height: 1215px;
+ 	padding: 20px 40px 10px 40px;
+ }
+ 
+ .register_notice {
+ 	width: 1163px;
+ 	height: 40px;
+ 	background-color: #f7f7f7;
+ 	/*	margin: 20px 20px 0px 30px;*/
+ }
+ 
+ .register_notice .span_title {
+ 	font-size: 16px;
+ 	font-weight: bold;
+ 	color: #709471;
+ }
+ 
+ .notice_info {
+ 	width: 1160px;
+ 	height: 26px;
+ 	background-color: #ffffff;
+ 	border: 1px solid #BABABA;
+ 	font-size: 14px;
+ 	padding-top: 5px;
+ }
+ 
+ .register_info {
+ 	width: 1163px;
+ 	height: 1150px;
+ 	background-color: #f7f7ee;
+ 	/* margin-top: 40px; */
+ }
+ 
+ .table_td_one {
+ 	width: 1162px;
+ 	height: 30px;
+ 	background-color: #BCBCB3;
+ 	color: #006400;
+ 	font-weight: bold;
+ }
+ 
+ .table_td_left {
+ 	margin-top: 5px;
+ }
+ 
+ .input_text {
+ 	width: 350px;
+ 	height: 23px;
+ }
+ 
+ .input_button {
+ 	width: 200px;
+ 	height: 30px;
+ 	font-size: 16px;
+ 	/*margin-left: 45px;*/
+ 	margin-top: 10px;
+ 	background-color: #c4d8c4;
+ 	cursor: pointer;
+ }
+ 
+ .input_button:hover {
+ 	background-color: #dbf8da;
+ }

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+/*工作空间底部*/
+.foot {
+	width: 1200px;
+	height: 74px;
+	clear: both;
+	float: left;
+	overflow: hidden;
+	text-align: center;
+}
+
+.footCtrl {
+	line-height: 49px;
+	color: #09c;
+}
+
+.footCtrl a {
+	margin: 0 5px;
+	color: #09c;
+	text-decoration: none;
+	padding: 0;
+	outline: none;
+}
+
+.copy {
+	height: auto;
+	line-height: 25px;
+	color: #666;
+	/* background: url(img/foot.jpg) repeat-x; */
+}
+
+.copy a {
+	margin: 0 5px;
+	color: #06f;
+	text-decoration: none;
+}

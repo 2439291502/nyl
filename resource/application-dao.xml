@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- 配置扫描的包 -->
+	<context:component-scan base-package="com.pxxy.handleMenuscript.mapper"></context:component-scan>
+	<!-- 加载数据库连接池的配置文件 -->
+	<util:properties id="dbConfig" location="classpath:db.properties"></util:properties>
+
+	<!-- 配置Bean用于数据库连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="#{dbConfig.driverClass}"></property>
+		<property name="url" value="#{dbConfig.url}"></property>
+		<property name="username" value="#{dbConfig.user}"></property>
+		<property name="password" value="#{dbConfig.password}"></property>
+		<property name="initialSize" value="#{dbConfig.initSize}"></property>
+		<property name="maxActive" value="#{dbConfig.maxActive}"></property>
+	</bean>
+
+	<!-- 配置MapperScannerConfiguer -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 用于配置持久层接口位置 -->
+		<property name="basePackage" value="com.pxxy.handleMenuscript.mapper"></property>
+	</bean>
+	<!-- 配置sqlSessionFactory -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 配置数据库连接池 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<!-- 配置持久化映射文件 -->
+		<property name="mapperLocations" value="classpath:mappers/*.xml"></property>
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						<value>
+							helperDialect=mysql
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+	</bean>
+</beans>

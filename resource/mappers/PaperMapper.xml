@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.handleMenuscript.mapper.PaperMapper">
+	<!-- paperEssayMap -->
+	<resultMap type="com.pxxy.handleMenuscript.bean.Paper" id="paperEssayMap">
+		<id property="paperId" column="paperId"></id>
+		<result property="year" column="year"></result>
+		<result property="issue" column="issue"></result>
+		<result property="styleId" column="styleId"></result>
+		<result property="columns" column="columns"></result>
+		<result property="essayId" column="essayId"></result>
+		<result property="date" column="date"></result>
+		<result property="downTime" column="downTime"></result>
+		<result property="readTime" column="readTime"></result>
+		<association property="essayStyle"
+			javaType="com.pxxy.handleMenuscript.bean.EssayStyle">
+			<id property="styleId" column="styleId"></id>
+			<result property="styleName" column="styleName"></result>
+		</association>
+		<association property="essay"
+			javaType="com.pxxy.handleMenuscript.bean.EssayInfo">
+			<id property="essayId" column="essayId"></id>
+			<result property="title" column="title"></result>
+			<result property="etitle" column="etitle"></result>
+			<result property="username" column="username"></result>
+			<result property="styleId" column="styleId"></result>
+			<result property="abstracts" column="abstracts"></result>
+			<result property="englishAbstract" column="englishAbstract"></result>
+			<result property="keywords" column="keywords"></result>
+			<result property="englishKeywords" column="englishKeywords"></result>
+			<result property="contributor" column="contributor"></result>
+			<result property="contributeDate" column="contributeDate"></result>
+			<result property="contentUrl" column="contentUrl"></result>
+			<result property="statusId" column="statusId"></result>
+			<result property="isContribute" column="isContribute"></result>
+			<result property="reference" column="reference"></result>
+			<!-- <result property="finishDate" column="finishDate"></result> -->
+			<result property="finishDate" column="finishDate"></result>
+			<!-- <association property="essayStyle" javaType="com.pxxy.handleMenuscript.bean.EssayStyle"> 
+				<id property="styleId" column="styleId"></id> <result property="styleName" 
+				column="styleName" ></result> </association> -->
+			<!-- 稿件留言一比一 -->
+			<association property="lMessage"
+				javaType="com.pxxy.handleMenuscript.bean.LeaveMessage">
+				<id property="leaveMessageId" column="leaveMessageId"></id>
+				<result property="essayId" column="essayId"></result>
+				<result property="username" column="username"></result>
+				<result property="lMessageContent" column="lMessageContent"></result>
+				<result property="lMessageTime" column="lMessageTime"></result>
+				<result property="lMessageState" column="lMessageState"></result>
+			</association>
+			<!-- 稿件作者 -->
+			<association property="user"
+				javaType="com.pxxy.handleMenuscript.bean.UserInfo">
+				<id property="userId" column="userId"></id>
+				<result property="username" column="username"></result>
+				<result property="password" column="password"></result>
+				<result property="tureName" column="tureName"></result>
+				<result property="email" column="email"></result>
+				<result property="sex" column="sex"></result>
+				<result property="profession" column="profession"></result>
+				<result property="research" column="research"></result>
+				<result property="postId" column="postId"></result>
+				<result property="eBackgroundId" column="eBackgroundId"></result>
+				<result property="workUnit" column="workUnit"></result>
+				<result property="address" column="address"></result>
+				<result property="postcode" column="postcode"></result>
+				<result property="phone" column="phone"></result>
+				<result property="telephone" column="telephone"></result>
+				<result property="applyExpert" column="applyExpert"></result>
+				<result property="createData" column="createData"></result>
+				<result property="updateDate" column="updateDate"></result>
+				<result property="typeId" column="typeId"></result>
+				<result property="state" column="state"></result>
+			</association>
+			<!-- 基金表 -->
+			<collection property="fundList" ofType="com.pxxy.handleMenuscript.bean.Fund">
+				<id column="fundId" property="fundId"></id>
+				<result column="essayId" property="essayId"></result>
+				<result column="fundLevel" property="fundLevel"></result>
+				<result column="fundCName" property="fundCName"></result>
+				<result column="fundEName" property="fundEName"></result>
+				<result column="fundNumber" property="fundNumber"></result>
+				<result column="fundPs" property="fundPs"></result>
+			</collection>
+		</association>
+	</resultMap>
+	<resultMap type="com.pxxy.handleMenuscript.bean.Paper" id="paperMap">
+		<id property="paperId" column="paperId"></id>
+		<result property="year" column="year"></result>
+		<result property="issue" column="issue"></result>
+		<result property="styleId" column="styleId"></result>
+		<result property="columns" column="columns"></result>
+		<result property="essayId" column="essayId"></result>
+		<result property="date" column="date"></result>
+		<result property="downTime" column="downTime"></result>
+		<result property="readTime" column="readTime"></result>
+		<association property="essayStyle"
+			javaType="com.pxxy.handleMenuscript.bean.EssayStyle">
+			<id property="styleId" column="styleId"></id>
+			<result property="styleName" column="styleName"></result>
+		</association>
+	</resultMap>
+	<!-- 添加期刊专栏类型 -->
+	<insert id="insertPaper" useGeneratedKeys="true" keyProperty="paperId"
+		parameterType="com.pxxy.handleMenuscript.bean.Paper">
+
+		INSERT INTO tb_paper<!-- ( year,issue,styleId,columns,essayId,date )values( 
+			#{year},#{issue},#{styleId},#{columns},#{essayId},#{date} ) -->
+		<set>
+			<if test="paperId != null">
+				paperId=#{paperId},
+			</if>
+			<if test="year != null">
+				year=#{year},
+			</if>
+			<if test="issue != null">
+				issue=#{issue},
+			</if>
+			<if test="styleId != null">
+				styleId=#{styleId},
+			</if>
+			<if test="columns != null">
+				columns=#{columns},
+			</if>
+			<if test="essayId != null">
+				essayId=#{essayId},
+			</if>
+			<if test="date != null">
+				date=#{date},
+			</if>
+			<if test="downTime != null">
+				downTime=#{downTime},
+			</if>
+			<if test="readTime != null">
+				readTime=#{readTime}
+			</if>
+
+		</set>
+	</insert>
+	<!-- 批量将稿件插入期刊中 -->
+	<insert id="insertEssays" useGeneratedKeys="true" parameterType="java.util.List">
+		insert into tb_paper (
+		year,
+		issue,
+		styleId,
+		column,
+		essayId
+		)values
+		<foreach collection="array" item="paperList" open="("
+			separator="," close=")">
+			(
+			#{paperList.year},
+			#{paperList.issue},
+			#{paperList.styleId},
+			#{paperList.column},
+			#{paperList.essayId}
+			)
+		</foreach>
+	</insert>
+	<update id="updatePaper" parameterType="com.pxxy.handleMenuscript.bean.Paper">
+		UPDATE tb_paper
+		<set>
+			<if test="year != null">
+				year=#{year},
+			</if>
+			<if test="issue != null">
+				issue=#{issue},
+			</if>
+			<if test="styleId != null">
+				styleId=#{styleId},
+			</if>
+			<if test="columns != null">
+				columns=#{columns},
+			</if>
+			<if test="essayId != null">
+				essayId=#{essayId},
+			</if>
+			<if test="date != null">
+				date=#{date},
+			</if>
+			<if test="downTime != null">
+				downTime=#{downTime},
+			</if>
+			<if test="readTime != null">
+				readTime=#{readTime}
+			</if>
+		</set>
+		where paperId=#{paperId}
+	</update>
+	<!-- 通过期刊稿件的essayId查询期刊稿件信息 -->
+	<select id="selectPaperByEssayId" resultType="com.pxxy.handleMenuscript.bean.Paper">
+		SELECT tb_paper.* FROM tb_paper WHERE tb_paper.essayId=#{essayId}
+	</select>
+	<!-- 通过期刊styleId查询相应的期刊栏目 -->
+	<select id="selectPaperByStyleId" resultMap="paperMap">
+		SELECT
+		tb_paper.*,tb_essay_style.styleName
+		FROM
+		tb_paper
+		LEFT JOIN
+		tb_essay_style
+		ON
+		tb_paper.styleId=tb_essay_style.styleId
+		WHERE
+		tb_paper.styleId=#{styleId}
+	</select>
+	<!-- 通过paperId查找期刊稿 -->
+	<select id="selectPaperById" resultMap="paperEssayMap">
+		SELECT
+		tb_paper.*,
+		tb_essay_style.styleName,
+		tb_essay_info.*,
+		tb_user_info.*,
+		tb_fund.*
+		FROM
+		tb_paper
+		LEFT JOIN tb_essay_style
+		ON
+		tb_paper.styleId=tb_essay_style.styleId
+		LEFT JOIN tb_essay_info
+		ON
+		tb_paper.essayId=tb_essay_info.essayId
+		LEFT JOIN tb_user_info
+		ON
+		tb_essay_info.contributor=tb_user_info.username
+		LEFT JOIN tb_fund
+		ON
+		tb_essay_info.essayId=tb_fund.essayId
+		where paperId=#{paperId}
+	</select>
+	<!-- SELECT * FROM tb_paper ORDER BY tb_paper.`year` ,tb_paper.date -->
+	<!-- 查询所有的期刊 年份 -->
+	<select id="selectAllPaper" resultMap="paperEssayMap">
+		SELECT DISTINCT
+		tb_paper.year,tb_paper.issue FROM tb_paper ORDER BY tb_paper.year DESC
+	</select>
+	<!-- 查询所有的期刊 年份 的期号 -->
+	<select id="selectAllIssue" resultMap="paperEssayMap">
+		SELECT DISTINCT
+		tb_paper.year,tb_paper.issue FROM tb_paper ORDER BY tb_paper.year DESC
+	</select>
+	<select id="selectPaperByYearAIssue" resultMap="paperEssayMap">
+		SELECT
+		tb_paper.*,
+		tb_essay_style.styleName,
+		tb_essay_info.*,
+		tb_user_info.*,
+		tb_fund.*
+		FROM tb_paper
+		LEFT JOIN tb_essay_style
+		ON
+		tb_paper.styleId=tb_essay_style.styleId
+		LEFT JOIN tb_essay_info
+		ON
+		tb_paper.essayId=tb_essay_info.essayId
+		LEFT JOIN tb_user_info
+		ON
+		tb_essay_info.contributor=tb_user_info.username
+		LEFT JOIN tb_fund
+		ON
+		tb_essay_info.essayId=tb_fund.essayId
+		WHERE tb_paper.year=#{year}
+		AND
+		tb_paper.issue=#{issue}
+
+	</select>
+	<!-- 多条件查询稿件信息 -->
+	<select id="selectPaper" parameterType="com.pxxy.handleMenuscript.bean.PaperVO"
+		resultMap="paperEssayMap">
+		SELECT
+		tb_paper.*,
+		tb_essay_style.styleName,
+		tb_essay_info.*,
+		tb_user_info.*,
+		tb_fund.*
+		FROM tb_paper
+		LEFT JOIN tb_essay_style
+		ON
+		tb_paper.styleId=tb_essay_style.styleId
+		LEFT JOIN tb_essay_info
+		ON
+		tb_paper.essayId=tb_essay_info.essayId
+		LEFT JOIN tb_user_info
+		ON
+		tb_essay_info.contributor=tb_user_info.username
+		LEFT JOIN tb_fund
+		ON
+		tb_essay_info.essayId=tb_fund.essayId
+		<where>
+			<if test="year!=null and year!=''">
+				AND tb_paper.year=#{year}
+			</if>
+			<if test="issue!=null and issue!=''">
+				AND tb_paper.issue=#{issue}
+			</if>
+			<if test="columns!=null and columns!=''">
+				AND tb_paper.columns like CONCAT('%',#{columns},'%')
+			</if>
+			<if test="essayId!=null and essayId!=''">
+				AND tb_paper.essayId like CONCAT('%',#{essayId},'%')
+			</if>
+			<if test="author!=null and author!=''">
+				AND tb_essay_info.username like CONCAT('%',#{author},'%')
+			</if>
+			<if test="title!=null and title!=''">
+				AND tb_essay_info.title like CONCAT('%',#{title},'%')
+			</if>
+			<if test="abstracts!=null and abstracts!=''">
+				AND tb_essay_info.abstracts like
+				CONCAT('%',#{abstracts},'%')
+			</if>
+			<if test="keywords!=null and keywords!=''">
+				AND tb_essay_info.keywords like
+				CONCAT('%',#{keywords},'%')
+			</if>
+			<if test="styleId!=null and styleId!=''">
+				AND tb_paper.styleId =#{styleId}
+			</if>
+		</where>
+	</select>
+	<select id="selectPaperByDownTimes" resultMap="paperEssayMap">
+		SELECT
+		tb_paper.*,
+		tb_essay_style.styleName,
+		tb_essay_info.*,
+		tb_user_info.*,
+		tb_fund.*
+		FROM tb_paper
+		LEFT JOIN tb_essay_style
+		ON
+		tb_paper.styleId=tb_essay_style.styleId
+		LEFT JOIN tb_essay_info
+		ON
+		tb_paper.essayId=tb_essay_info.essayId
+		LEFT JOIN tb_user_info
+		ON
+		tb_essay_info.contributor=tb_user_info.username
+		LEFT JOIN tb_fund
+		ON
+		tb_essay_info.essayId=tb_fund.essayId
+		ORDER BY tb_paper.downTime DESC
+	</select>
+	<select id="selectNewPaperYear" resultType="String">
+		SELECT MAX(tb_paper.year) FROM tb_paper
+	</select>
+	<select id="selectNewPaperIssue" resultType="String">
+		SELECT MAX(issue) FROM tb_paper WHERE tb_paper.year=#{year}
+	</select>
+
+</mapper>

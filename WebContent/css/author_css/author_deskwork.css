@@ -1,0 +1,315 @@
+@charset "UTF-8";
+.*{
+	padding: 0px;
+	margin: 0px;
+	font-size: 14px;
+	/* background:#ffffff; */
+}
+
+body {
+	background: #eeeeee;
+}
+
+.workdesk_body {
+	width: 1345px;
+	height: auto;
+	padding-left: 70px;
+}
+
+.workdesk_main {
+	width: 1200px;
+	height: auto;
+	overflow: hidden;
+	/*padding-left: 40px;*/
+}
+
+
+/*工作空间头部*/
+
+.workdesk_head {
+	width: 1160px;
+	height: 80px;
+	background: url(../../img/author_img/head_1200.jpg) no-repeat 0 0 #c7d1ff;
+	padding-left: 41px;
+	overflow: hidden;
+}
+
+.head_top {
+	width: 1160px;
+	/*height: 80px;*/
+	height: 54px;
+}
+
+.workdesk_title h1 {
+	width: 1020px;
+	height: 54px;
+	line-height: 54px;
+	float: left;
+	overflow: hidden;
+	font-size: 16px;
+	color: #00105c;
+	text-shadow: 1px 1px 1px #97a1cc;
+	font-family: microsoft YaHei;
+	font-weight: normal;
+	text-indent: -7px;
+	float: left;
+}
+
+.workdesk_datetime {
+	float: left;
+	width: 100px;
+	height: 54px;
+	line-height: 54px;
+	color: #FFF;
+}
+
+.workdesk_head table {
+	line-height: 23px;
+}
+
+.workdesk_head table a {
+	color: #3a4c9f;
+	text-decoration: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.workdesk_head table tr td .info a {
+	padding-right: 5px;
+	font-family: Arial;
+}
+
+.workdesk_head table a {
+	color: #3a4c9f;
+	text-decoration: none;
+}
+
+#EmailCount {
+	color: Red;
+}
+
+.workdesk_head table tr td.info span {
+	font-family: Arial;
+}
+
+.workdesk_head table a.helpKey {
+	background: url(../../img/author_img/helpKey.jpg) no-repeat 0 2px;
+	display: inline-block;
+	padding-left: 20px;
+	line-height: 23px;
+}
+
+
+/*工作空间导航*/
+
+.desktop_nav {
+	background-color: #f9f9f9;
+	text-align: left;
+	height: 35px;
+	line-height: 35px;
+	color: #777777;
+	/* background: url(../../img/author_img/desktopNav.jpg) repeat-y; */
+	padding: 0 0 0 13px;
+	position: relative;
+}
+
+.desktop_nav a {
+	margin: 0 5px;
+	display: inline-block;
+	text-decoration: none;
+	padding: 0;
+	cursor: pointer;
+	outline: none;
+}
+
+.desktop_nav table a:hover {
+	text-decoration: underline;
+	color: #3a4c9f;
+}
+
+.desk_content {
+	padding-bottom: 100px;
+	overflow: hidden;
+	background: url(../../img/author_img/workDeskBackground.png)no-repeat 0 0;
+}
+
+
+/*工作空间左边*/
+
+.left {
+	float: left;
+}
+
+.desk_left {
+	width: 856px;
+	padding-top: 4px;
+	float: left;
+}
+
+.left_content {
+	width: 820px;
+	height: auto;
+	border: 1px solid #bbb;
+	background: #fff;
+	padding: 0px;
+	margin-left: 20px;
+}
+
+.userInfoList {
+	width: 820px;
+	height: auto;
+	background: #ebebeb;
+	padding: 12px 0 17px 0;
+	overflow: hidden;
+}
+
+.userInfoList_gaojianchuli {
+	overflow: hidden;
+	clear: both;
+	margin-bottom: 13px;
+}
+
+.userInfoList_yuegaochuli {
+	margin-bottom: 29px;
+	overflow: hidden;
+	clear: both;
+}
+
+.userInfoList_gaojianchuli_tt {
+	width: 86px;
+	height: 75px;
+	/* background: url(../../img/author_img/userInfoList_gaojianchuli.jpg) no-repeat 0 0; */
+	float: left;
+}
+
+.userInfoList_yuegaochuli_tt {
+	width: 86px;
+	height: 75px;
+ 	float: left;
+}
+
+.userInfoList_feiyongguanli_tt {
+	width: 86px;
+	height: 75px;
+ 	float: left;
+}
+
+.userInfoList ul {
+	width: 718px;
+	float: right;
+	margin-right: 16px;
+	height: auto;
+	display: block;
+	line-height: 23px;
+}
+
+.userInfoList ul li {
+	width: 718px;
+	list-style: none;
+	height: auto;
+	margin-bottom: 1px;
+	background: #fff;
+	display: block;
+}
+
+.userInfoList ul li:hover {
+	background-color: #09c;
+}
+
+.userInfoList ul li table {
+	margin-left: 15px;
+	text-align: center;
+}
+
+.userInfoList ul li table a {
+	display: inline;
+	padding: 0;
+	color: #09c;
+	text-decoration: none;
+	height: 23px;
+}
+
+.userInfoList ul li.deepBackground {
+	background: #eef5ff;
+	font-weight: bold;
+	color: #3a4c9f;
+}
+
+
+/*工作空间右边*/
+
+.desk_right {
+	width: 345px;
+	padding-top: 4px;
+}
+
+.desktopAuthorArea {
+	padding: 0 0 10px 0;
+	width: 327px;
+	height: auto;
+	border: 1px solid #999;
+	margin-bottom: 15px;
+	position: relative;
+	margin-left: 25px;
+	margin-top: -1px;
+}
+
+.desktopAuthorAreaTitle {
+	width: 100%;
+	height: 45px;
+	background: url(../../img/author_img/authorContribute.png) no-repeat 1px 0;
+}
+
+.desktopAuthorArea a {
+	width: 312px;
+	height: 34px;
+	display: block;
+	margin: 8px auto 0 auto;
+	background: url(../img/desktopAuthorAreaA.jpg) repeat-x 0 0;
+	border: 1px solid #999;
+	line-height: 34px;
+	text-align: center;
+	color: #666;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+
+/*工作空间底部*/
+
+.foot {
+	width: 1200px;
+	height: 74px;
+	clear: both;
+	float: left;
+	overflow: hidden;
+	text-align: center;
+}
+
+.footCtrl {
+	line-height: 49px;
+	color: #09c;
+}
+
+.footCtrl a {
+	margin: 0 5px;
+	color: #09c;
+	text-decoration: none;
+	padding: 0;
+	outline: none;
+}
+
+.copy {
+	height: 25px;
+	line-height: 25px;
+	color: #666;
+	background: url(../img/foot.jpg) repeat-x;
+}
+
+.copy a {
+	margin: 0 5px;
+	color: #06f;
+	text-decoration: none;
+}

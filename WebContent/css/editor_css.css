@@ -1,0 +1,158 @@
+.
+* {
+	padding: 0 px;
+	margin: 0px;
+	font-family: Arial, Sans-Serif;
+	font-size: 16px;
+}
+
+.index_container {
+	height: auto;
+	width: auto;
+	overflow: hidden;
+	padding-top: 16px;
+}
+
+.index_main {
+	width: 986px;
+	height: auto;
+	margin: 0 auto;
+	position: relative;
+}
+
+.index_title {
+	width: inherit;
+	height: 98px;
+}
+
+.index_title_left {
+	width: inherit;
+	height: inherit;
+	background: url(../../img/login/index_title_left.jpg) no-repeat;
+}
+
+.index_title_right {
+	width: inherit;
+	height: 98px;
+	background: url(../../img/login/index_title_right.jpg) no-repeat top
+		right;
+}
+
+.index_title h1 {
+	width: 898px;
+	height: 46px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-family: Arial, Sans-Serif;
+	padding: 0 0 0 88px;
+	padding-top: 0px;
+	letter-spacing: 0.1em;
+	text-shadow: 0 1px 0 #FFF;
+	font-size: 24px;
+	padding-top: 52px;
+	background: #e5e3f1;
+	-moz-border-radius: 5px;
+}
+
+.index_title h1 span {
+	font-size: 24px;
+}
+
+.index_login {
+	width: inherit;
+	height: 200px;
+	background: #d2dbed;
+	padding-top: 30px;
+}
+
+.index_login table td {
+	line-height: 45px;
+	padding-right: 8px;
+}
+/* 
+.input_button {
+
+    margin: auto 355px;
+    padding-top: 8px;
+
+}
+ */
+.input_button {
+	width: 88px;
+	height: 30px;
+	font-size: 16px;
+	background-color: #A9B4BC;
+	cursor: pointer;
+}
+
+.index_login table td .input_button:hover {
+	background-color: #C6E2FF;
+}
+
+/*工作空间底部*/
+.foot {
+	width: 1000px;
+	height: 74px;
+	clear: both;
+	float: left;
+	overflow: hidden;
+	text-align: center;
+}
+
+.footCtrl {
+	line-height: 49px;
+	color: #09c;
+}
+
+.footCtrl a {
+	margin: 0 5px;
+	color: #09c;
+	text-decoration: none;
+	padding: 0;
+	outline: none;
+}
+
+.copy {
+	height: auto;
+	line-height: 25px;
+	color: #666;
+	background: url(../img/foot.jpg) repeat-x;
+}
+
+.copy a {
+	margin: 0 5px;
+	color: #06f;
+	text-decoration: none;
+}
+
+.examine_essayinfo {
+	line-height: 30px;
+}
+
+.examine_table {
+	padding-top: 10px;
+}
+
+.examine_table h2 {
+	color: #000;
+	background: #C0D2F8;
+	font-size: 16px;
+	padding: 2px;
+}
+
+.examine_table h3 {
+	color: #000;
+	background: #EEF0F5;
+}
+
+.examine_table table {
+	width: 100%;
+	border-collapse: collapse;
+	border: #d3d3d3 solid 1px;
+	margin-bottom: 28px;
+}
+
+/* .list1 th,td {
+	border-right: #d3d3d3 solid 1px;
+	border-bottom: #d3d3d3 solid 1px;
+} */

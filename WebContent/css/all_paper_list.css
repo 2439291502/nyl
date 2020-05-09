@@ -1,0 +1,83 @@
+@charset "UTF-8";
+/*期刊稿件排布*/
+.paper_title{
+	align:center;
+	width:100%;
+	background:#e6e3e3;;
+	padding:8px;
+	font-size:15px;
+	color:#928e8e;
+	font-family:Arial;
+}
+.contbox_list1{
+	font-family:Arial;
+}
+.contbox_list1 li {
+	padding: 6px 14px 4px 33px;
+	border-bottom: 1px dashed #aaa;
+	line-height: 16px;
+	overflow: hidden;
+	display: block;
+	vertical-align: top;
+	display: block;
+	color: #666666;
+	background: #F3F3F3;
+}
+
+.list_columns {
+
+    color: #877a7a;
+    padding: 10px 30px;
+    font-size: 16px;
+
+}
+
+.contbox_list1 li h3 a {
+	text-decoration: none;
+	color: #000;
+}
+
+.contbox_list1 li h3 a:hover {
+	text-decoration: underline;
+	/*color: #2678ac;*/
+}
+
+.contbox_list1 li a {
+	display: inline;
+	color: #2678ac;
+	float: left;
+}
+
+
+.contbox_list1 li h3 {
+	font-size: 13px;
+	margin: 0;
+	color: #000;
+}
+
+.contbox_list1 li span {
+
+    color: #175ca8;
+    display: block;
+    line-height: 25px;
+    align-content: center;
+    margin-left: 15px;
+
+}
+
+.operate_link {
+
+   margin-left: 400px;
+ 
+}
+.operate_link a{
+	margin-right: 10px;
+}
+.paper_link {
+	
+	margin-right: 20px;
+}
+
+.workTable tr{
+	
+}

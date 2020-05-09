@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>作者工作空间</title>
+	</head>
+	<style>
+		* {
+			padding: 0px;
+			margin: 0px;
+			font-size: 14px;
+		}
+		
+		body {
+			background: #eeeeee;
+		}
+		
+		.workdesk_body {
+			width: 1345px;
+			height: auto;
+			padding-left: 70px;
+		}
+		
+		.workdesk_main {
+			width: 1200px;
+			height: auto;
+			overflow: hidden;
+			/*padding-left: 40px;*/
+		}
+		/*工作空间头部*/
+		
+		.workdesk_head {
+			width: 1160px;
+			height: 80px;
+			background: url(../../img/author_img/head_1200.jpg) no-repeat 0 0 #c7d1ff;
+			padding-left: 41px;
+			overflow: hidden;
+		}
+		
+		.head_top {
+			width: 1160px;
+			/*height: 80px;*/
+			height: 54px;
+		}
+		
+		.workdesk_title h1 {
+			width: 1020px;
+			height: 54px;
+			line-height: 54px;
+			overflow: hidden;
+			font-size: 16px;
+			color: #00105c;
+			text-shadow: 1px 1px 1px #97a1cc;
+			font-family: microsoft YaHei;
+			font-weight: normal;
+			text-indent: -7px;
+			float: left;
+		}
+		
+		.workdesk_datetime {
+			float: left;
+			width: 100px;
+			height: 54px;
+			line-height: 54px;
+			color: #FFF;
+		}
+		
+		.workdesk_head table {
+			line-height: 23px;
+		}
+		
+		.workdesk_head table a {
+			color: #3a4c9f;
+			text-decoration: none;
+			outline: none;
+			cursor: pointer;
+		}
+		
+		.workdesk_head table tr td .info a {
+			padding-right: 5px;
+			font-family: Arial;
+		}
+		
+		.workdesk_head table a {
+			color: #3a4c9f;
+			text-decoration: none;
+		}
+		
+		#EmailCount {
+			color: Red;
+		}
+		
+		.workdesk_head table tr td.info span {
+			font-family: Arial;
+		}
+		
+		.workdesk_head table a.helpKey {
+			background: url(../../img/author_img/helpKey.jpg) no-repeat 0 2px;
+			display: inline-block;
+			padding-left: 20px;
+			line-height: 23px;
+		}
+		/*工作空间导航*/
+		
+		.desktop_nav {
+			background-color: #f9f9f9;
+			text-align: left;
+			height: 35px;
+			line-height: 35px;
+			color: #777777;
+			background: url(../../img/author_img/desktopNav.jpg) repeat-y;
+			padding: 0 0 0 13px;
+			position: relative;
+		}
+		
+		.desktop_nav a {
+			margin: 0 5px;
+			display: inline-block;
+			text-decoration: none;
+			padding: 0;
+			cursor: pointer;
+			outline: none;
+		}
+		
+		.desktop_nav table a:hover {
+			text-decoration: underline;
+			color: #3a4c9f;
+		}
+		
+		.desk_content {
+			padding-bottom: 100px;
+			overflow: hidden;
+			background: url(../../img/author_img/workDeskBackground.png)no-repeat 0 0;
+		}
+		/*工作空间左边*/
+		
+		.left {
+			float: left;
+		}
+		
+		.desk_left {
+			width: 856px;
+			padding-top: 4px;
+			float: left;
+		}
+		
+		.left_content {
+			width: 820px;
+			height: auto;
+			border: 1px solid #bbb;
+			background: #fff;
+			padding: 0px;
+			margin-left: 20px;
+		}
+		
+		.userInfoList {
+			width: 820px;
+			height: auto;
+			background: #ebebeb;
+			padding: 12px 0 17px 0;
+			overflow: hidden;
+		}
+		
+		.userInfoList_gaojianchuli {
+			overflow: hidden;
+			clear: both;
+			margin-bottom: 13px;
+		}
+		
+		.userInfoList_yuegaochuli {
+			margin-bottom: 29px;
+			overflow: hidden;
+			clear: both;
+		}
+		
+		.userInfoList_gaojianchuli_tt {
+			width: 86px;
+			height: 75px;
+			background: url(../../img/author_img/userInfoList_gaojianchuli.jpg) no-repeat 0 0;
+			float: left;
+		}
+		
+		.userInfoList_yuegaochuli_tt {
+			width: 86px;
+			height: 75px;
+			background: url(../../img/author_img/userInfoList_yuegaochuli.jpg) no-repeat 0 0;
+			float: left;
+		}
+		
+		.userInfoList_feiyongguanli_tt {
+			width: 86px;
+			height: 75px;
+			background: url(../../img/author_img/userInfoList_feiyongguanli.png) no-repeat 0 0;
+			float: left;
+		}
+		
+		.userInfoList ul {
+			width: 718px;
+			float: right;
+			margin-right: 16px;
+			height: auto;
+			display: block;
+			line-height: 23px;
+		}
+		
+		.userInfoList ul li {
+			width: 718px;
+			list-style: none;
+			height: auto;
+			margin-bottom: 1px;
+			background: #fff;
+			display: block;
+		}
+		
+		.userInfoList ul li:hover {
+			background-color: #09c;
+		}
+		
+		.userInfoList ul li table {
+			margin-left: 15px;
+			text-align: center;
+		}
+		
+		.userInfoList ul li table a {
+			display: inline;
+			padding: 0;
+			color: #09c;
+			text-decoration: none;
+			height: 23px;
+		}
+		
+		.userInfoList ul li.deepBackground {
+			background: #eef5ff;
+			font-weight: bold;
+			color: #3a4c9f;
+		}
+		/*.userInfoList table tr td {
+			padding-left: 10px;
+		}*/
+		/*工作空间右边*/
+		
+		.desk_right {
+			width: 345px;
+			padding-top: 4px;
+		}
+		
+		.desktopAuthorArea {
+			padding: 0 0 10px 0;
+			width: 327px;
+			height: auto;
+			border: 1px solid #999;
+			margin-bottom: 15px;
+			position: relative;
+			margin-left: 25px;
+			margin-top: -1px;
+		}
+		
+		.desktopAuthorAreaTitle {
+			width: 100%;
+			height: 45px;
+			background: url(../../img/author_img/authorContribute.png) no-repeat 1px 0;
+		}
+		
+		.desktopAuthorArea a {
+			width: 312px;
+			height: 34px;
+			display: block;
+			margin: 8px auto 0 auto;
+			background: url(../img/desktopAuthorAreaA.jpg) repeat-x 0 0;
+			border: 1px solid #999;
+			line-height: 34px;
+			text-align: center;
+			color: #666;
+			text-decoration: none;
+			font-size: 14px;
+			font-weight: bold;
+			letter-spacing: 1px;
+		}
+		/*工作空间底部*/
+		
+		.foot {
+			width: 1200px;
+			height: 74px;
+			clear: both;
+			float: left;
+			overflow: hidden;
+			text-align: center;
+		}
+		
+		.footCtrl {
+			line-height: 49px;
+			color: #09c;
+		}
+		
+		.footCtrl a {
+			margin: 0 5px;
+			color: #09c;
+			text-decoration: none;
+			padding: 0;
+			outline: none;
+		}
+		
+		.copy {
+			height: 25px;
+			line-height: 25px;
+			color: #666;
+			background: url(../img/foot.jpg) repeat-x;
+		}
+		
+		.copy a {
+			margin: 0 5px;
+			color: #06f;
+			text-decoration: none;
+		}
+		/*稿件中心*/
+		
+		.main {
+			padding-bottom: 100px;
+			overflow: hidden;
+			position: relative;
+		}
+		
+		.map {
+			width: 212px;
+			height: auto;
+			padding-top: 4px;
+			overflow: hidden;
+			float: left;
+		}
+		
+		.mapContainer {
+			width: 182px;
+			height: auto;
+			min-height: 600px;
+			margin: 0 auto;
+			padding: 4px;
+			background: #fff;
+			border: 1px solid #add1eb;
+			border-radius: 3px;
+			overflow: hidden;
+		}
+		
+		.map_tt {
+			background: url(../img/blue/map.jpg) no-repeat;
+			width: 100%;
+			height: 24px;
+		}
+		
+		.selectZone {
+			background: #e5eafe;
+		}
+		
+		.map_zone {
+			height: 24px;
+			line-height: 24px;
+			margin-bottom: 1px;
+			background: #efefef;
+		}
+		
+		.map_zone a {
+			display: block;
+			color: #000;
+			text-indent: 5px;
+		}
+		
+		.zoneCont {
+			height: auto;
+			background: #fff;
+			overflow: hidden;
+		}
+		
+		.zoneCont p {
+			height: 24px;
+			line-height: 24px;
+			padding-left: 17px;
+			cursor: pointer;
+		}
+		
+		.zoneCont ul {
+			padding-left: 15px;
+		}
+		
+		.map_up {
+			background: url(../img/map_up.jpg) no-repeat 5px center;
+		}
+		
+		p {
+			padding: 0;
+			padding-left: 0px;
+			margin: 0;
+		}
+		
+		.zoneCont p a {
+			display: inline-block;
+			color: #000;
+		}
+		
+		.map a {
+			text-decoration: none;
+		}
+		
+		a {
+			margin: 0;
+			padding: 0;
+			outline: none;
+		}
+		
+		.zoneCont ul li {
+			padding-left: 18px;
+			line-height: 22px;
+			width: 100%;
+			cursor: pointer;
+			display: inline-block;
+			list-style: none;
+		}
+		
+		.zoneCont ul li a {
+			line-height: 22px;
+			color: #666;
+		}
+		
+		.map a {
+			text-decoration: none;
+		}
+		
+		.work_left {
+			width: 989px;
+			height: 614px;
+			margin: auto 20px auto 210px;
+			background: #FFF;
+		}
+		
+		.workAreaHead {
+			width: 988px;
+			height: 80px;
+			margin-bottom: 15px;
+		}
+		
+		.stepName {
+			width: 968px;
+			height: 41px;
+			border-bottom: 1px solid #dbdbdb;
+			background: url(../../img/author_img/workTitle.jpg)repeat-x 0 0;
+			margin-bottom: 1px;
+			line-height: 41px;
+			padding: 0 10px;
+			color: #575765;
+		}
+		
+		.stepHelpInfo {
+			width: 988px;
+			height: auto;
+			background: #f6f6f6;
+			padding: 7px 25px 7px 25px;
+			line-height: 23px;
+			color: #575765;
+		}
+		
+		.workTable {
+			width: 979px;
+		}
+		
+		.workTable_tt {
+			width: 979px;
+			height: 27px;
+			line-height: 27px;
+			background-color: #AAAAAA;
+		}
+		
+		.workTable_tt h3 {
+			font-size: 13px;
+			text-indent: 20px;
+			color: #666;
+		}
+		
+		.workTable_ctrl {
+			line-height: 29px;
+			height: 29px;
+			line-height: 29px;
+			background: #f7f7f7;
+			border-right: 1px solid #ccc;
+			border-left: 1px solid #ccc;
+		}
+		
+		.redfont {
+			color: red;
+		}
+		
+		.clear {
+			height: 0;
+			width: 100%;
+			clear: both;
+			font-size: 0;
+		}
+		
+		.workTable_main {
+			width: 977px;
+			height: auto;
+			border: 1px solid #ccc;
+			border-bottom: none;
+		}
+		
+		.workTable_main table tr th {
+			height: 43px;
+			line-height: 20px;
+			background: #f1f1f1;
+			font-weight: 400;
+			border-right: 1px solid #ededed;
+		}
+		
+		.workTable_main table tr td {
+			vertical-align: middle;
+			padding: 0 5px 0 10px;
+			height: 57px;
+			line-height: 20px;
+			text-align: left;
+			border-right: 1px solid #ededed;
+			border-bottom: 1px solid #ccc;
+		}
+		
+		.workTable_main table tr a {
+			margin-right: 0px;
+		}
+		
+		.workTable_btn {
+			width: 977px;
+			height: auto;
+			line-height: 36px;
+			background: #fff;
+			border: 1px solid #ccc;
+			border-top: none;
+			padding: 8px 0;
+		}
+		
+	</style>
+
+	<body>
+		<div class="workdesk_body">
+			<div class="workdesk_main">
+				<div class="workdesk_head">
+					<div class="head_top">
+						<div class="workdesk_title">
+							<h1>《萍乡学院学报》 ----作者工作中心</h1>
+						</div>
+						<div class="workdesk_datetime">
+							<span style="font-size: 14px;">2019/11/19</span>
+						</div>
+
+					</div>
+
+					<table width="100%" cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+							<tr valign="top" height="23">
+								<td width="40%">
+									您好，
+									<a href="#" title="Nie YuLing">Nie ..</a>
+									【
+									<a title="点击退出系统">点击退出</a>
+									|
+									<a title="个人资料">个人资料</a>
+
+									】
+								</td>
+								<td class="info" align="right">
+									<a title="点击进入收件箱">
+										站内信息【
+										<span id="emailCount">0</span> 条 / 共
+										<span id="emailTitle">0</span> 条】
+
+									</a>
+									<a href="#" class="helpKey" title="显示帮助信息">帮助</a>
+								</td>
+								<td class="info" align="right">
+									<a title="点击进入收件箱">
+										当前身份【
+										<span id="currenUser">作者</span> |
+										<a id="changeUser" title="切换身份">更换</a>
+										】
+									</a>
+								</td>
+								<td>
+									<a href="#" title="反馈意见" style="height:23px;background: #8A9CA5;">反馈意见</a>
+								</td>
+								<td>
+									<!--<a href="#" title="反馈意见">反馈意见</a>-->
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="desktop_nav">
+					<a>工作空间</a>
+					|
+					<a>稿件中心</a>
+				</div>
+				<div class="main">
+					<div class="map left">
+						<div class="mapContainer">
+							<div class="map_tt">
+								<div class="map_zone selectZone">
+									<a>稿件中心</a>
+								</div>
+								<div class="zoneCont" style="display: block;">
+									<p class="map_up">
+										<a>我的稿件管理</a>
+									</p>
+									<ul style="display: block;">
+										<li>
+											<a>待修改稿件(0)</a>
+										</li>
+										<li>
+											<a>已投稿件(0)</a>
+										</li>
+										<li>
+											<a>草稿(2)</a>
+										</li>
+										<li>
+											<a>我为通讯作者的投稿(0)</a>
+										</li>
+										<li>
+											<a>我为共同作者的投稿(0)</a>
+										</li>
+
+									</ul>
+									<p class="map_up map_down">
+										<a>我的费用管理</a>
+									</p>
+									<ul style="display: block;">
+										<li>
+											<a>审稿费(0)</a>
+										</li>
+										<li>
+											<a>版面费(0)</a>
+										</li>
+										<li>
+											<a>作者稿费(2)</a>
+										</li>
+
+									</ul>
+									<p class="map_up map_down">
+										<a>我的约稿管理</a>
+									</p>
+									<ul style="display: block;">
+										<li>
+											<a>待回应的约稿请求</a>
+										</li>
+										<li>
+											<a>待提交的约稿稿件(0)</a>
+										</li>
+										<li>
+											<a>待提交的约稿稿件(2)</a>
+										</li>
+										<li>
+											<a>已提交的约稿稿件</a>
+										</li>
+
+									</ul>
+									<p class="map_up map_down">
+										<a>投稿</a>
+									</p>
+									<ul style="display: block;">
+										<li>
+											<a>导航式投稿（推荐）</a>
+										</li>
+										<li>
+											<a>一部式投稿</a>
+										</li>
+
+									</ul>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+					<div class="work_left">
+						<div class="workAreaHead">
+							<div class="stepName">
+								<span>稿件中心</span><span>》》稿件管理中心》》</span><span style="font-weight: 700;">待修稿件</span>
+							</div>
+							<div class="stepHelpInfo">
+								<div>
+									请从左侧栏目导航中选择相应功能栏目完成处理操作
+								</div>
+							</div>
+						</div>
+						<div class="workTable">
+							<div class="workTable_tt">
+								<h3>待修稿件</h3>
+							</div>
+							<div class="workTable_ctrl">
+								<table>
+									<tbody>
+										<tr>
+											<td width="50%"></td>
+											<td align="center">
+												共
+												<font class="redfont">0</font>
+												条记录
+											</td>
+											<td width="30%">
+												每页显示
+												<a>10</a>条记录 每页显示
+												<a href="#">20</a>条记录
+											</td>
+
+										</tr>
+										<tr>
+
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+							<div class="workTable_main">
+								<table>
+									<tr>
+										<th style="width: 11.5%;">稿件序号</th>
+										<th style="width: 11.5%;">稿件编号</th>
+										<th style="width: 11.5%;">稿件标题</th>
+										<th style="width: 11.5%;">稿件作者</th>
+										<th style="width: 11.5%;">稿件时间</th>
+										<th style="width: 11.5%;">稿件状态</th>
+										<th style="width: 11.5%;">稿件分类</th>
+										<th style="width: 11.5%;">投稿时间</th>
+										<th style="width: 11.5%;">稿件操作</th>
+									</tr>
+									<tr>
+										<td><input name="paperName" type="checkbox">111</input>
+										</td>
+										<td>稿件编号</td>
+										<td>稿件标题</td>
+										<td>聂玉玲</td>
+										<td>2019-11-28</td>
+										<td>稿件状态</td>
+										<td>稿件分类</td>
+										<td>投稿时间</td>
+										<td>
+											<a href="#" title="修改稿件">修改</a>
+											<a href="#" title="删除稿件">删除</a>
+										</td>
+									</tr>
+
+								</table>
+							</div>
+							<div class="workTable_btn">
+								<table>
+									<tbody>
+										<tr valign="top">
+											<td>
+												<table width="120" cellpadding="0" cellspacing="5" border="0">
+													<tbody>
+														<tr>
+															<td width="25">
+																<input type="checkbox" name="" value="" />
+															</td>
+															<td align="left">取消/全选</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+											<td width="49%" align="right"></td>
+											<td align="right" width="325" style="margin-right: 50px;">
+												第1页 一共5页
+												<input type="button" value="第一页" />
+												<input type="button" name="prePage" value="上一页" />
+												<input type="button" name="nextPage" value="上一页" />
+												<input type="button" value="最后页" />
+											</td>
+											<div class="div_goto" style="float: right;">
+												<input type="text" name="" value="1" style="width:60px; height: 26px;" />
+												<input type="button" name="" value="跳转" style="width:50px" />
+											</div>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		</div>
+		<div class="foot">
+			<div class="footCtrl">
+				<a href="#">投稿须知</a>|
+				<a href="#">版权协议</a>|
+				<a href="#">稿件模板</a>|
+				<a href="#">联系我们</a>|
+				<a href="#">首页</a>
+			</div>
+			<div class="copy">
+				本系统由中国知网提供技术支持 当前版本：v9.01
+				<a>使用帮助</a>
+				技术支持
+				<a href="mailto:cb@cnki.net">cb@cnki.net</a>
+				<a href="http://find.cb.cnki.net">http://find.cb.cnki.net</a>
+				建议采用IE 6.0以上版本，1024*768分辨率浏览本页
+
+			</div>
+		</div>
+
+	</body>
+
+</html>

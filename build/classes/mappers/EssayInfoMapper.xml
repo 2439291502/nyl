@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pxxy.handleMenuscript.mapper.EssayInfoMapper">
+	<!-- essayResultMap -->
+	<resultMap type="com.pxxy.handleMenuscript.bean.EssayInfo" id="essayInfoMap">
+		<id property="essayId" column="essayId"/>
+		<result property="title" column="title"/>
+		<result property="etitle" column="etitle"/>
+		<result property="username" column="username"/>
+		<result property="styleId" column="styleId"/>
+		<result property="abstracts" column="abstracts"/>
+		<result property="englishAbstract" column="englishAbstract"/>
+		<result property="keywords" column="keywords"/>
+		<result property="englishKeywords" column="englishKeywords"/>
+		<result property="contributor" column="contributor"/>
+		<result property="contributeDate" column="contributeDate"/>
+		<result property="contentUrl" column="contentUrl"/>
+		<result property="statusId" column="statusId"/>
+		<result property="isContribute" column="isContribute"/>
+		<result property="reference" column="reference"/>
+		<!-- <result property="finishDate" column="finishDate"/> -->
+		<result property="finishDate" column="finishDate"/>
+		<association property="essayStyle" javaType="com.pxxy.handleMenuscript.bean.EssayStyle">
+			<id property="styleId" column="styleId"/>
+			<result property="styleName" column="styleName"/>
+		</association>
+		<!-- 稿件状态 -->
+		<association property="status" javaType="com.pxxy.handleMenuscript.bean.EssayStatus">
+			<id property="statusId" column="statusId"/>
+			<result property="statusName" column="statusName"/>
+		</association>
+		<!-- 稿件留言一比一 -->
+		<association property="lMessage" javaType="com.pxxy.handleMenuscript.bean.LeaveMessage">
+			<id column="leaveMessageId" property="leaveMessageId"></id>
+			<result column="essayId" property="essayId"></result>
+			<result column="username" property="username"></result>
+			<result column="lMessageContent" property="lMessageContent"></result>
+			<result column="lMessageTime" property="lMessageTime"></result>
+			<result column="lMessageState" property="lMessageState"></result>
+		</association>
+		<!-- 基金表 -->
+		<collection property="fundList" ofType="com.pxxy.handleMenuscript.bean.Fund">
+			<id column="fundId" property="fundId"></id>
+			<result column="essayId" property="essayId"></result>
+			<result column="fundLevel" property="fundLevel"></result>
+			<result column="fundCName" property="fundCName"></result>
+			<result column="fundEName" property="fundEName"></result>
+			<result column="fundNumber" property="fundNumber"></result>
+			<result column="fundPs" property="fundPs"></result>
+		</collection>
+	</resultMap>
+	<!-- 查询所有稿件 -->
+	<select id="selectAllEssay" resultMap="essayInfoMap">
+		SELECT tb_essay_info.*, tb_essay_status.*,tb_essay_style.*,tb_fund.*,tb_leaveMessage.*
+		FROM tb_essay_info 
+		LEFT JOIN tb_essay_style
+		ON tb_essay_info.styleId=tb_essay_style.styleId
+		LEFT JOIN tb_essay_status
+		ON tb_essay_info.statusId=tb_essay_status.statusId
+		LEFT JOIN tb_fund
+		ON tb_essay_info.essayId=tb_fund.essayId
+		LEFT JOIN tb_leaveMessage
+		ON tb_essay_info.essayId=tb_leaveMessage.essayId
+	</select>
+	
+	<!-- 通过作者名及稿件状态查询所有稿件 -->
+	<select id="selectEssayByUsernameAndStatusId" resultMap="essayInfoMap">
+		SELECT tb_essay_info.*, tb_essay_status.*,tb_essay_style.*,tb_fund.*,tb_leaveMessage.*
+		FROM tb_essay_info 
+		LEFT JOIN tb_essay_style
+		ON tb_essay_info.styleId=tb_essay_style.styleId
+		LEFT JOIN tb_essay_status
+		ON tb_essay_info.statusId=tb_essay_status.statusId
+		LEFT JOIN tb_fund
+		ON tb_essay_info.essayId=tb_fund.essayId
+		LEFT JOIN tb_leaveMessage
+		ON tb_essay_info.essayId=tb_leaveMessage.essayId
+		WHERE tb_essay_info.contributor=#{contributor}
+		AND tb_essay_info.statusId=#{statusId}
+	</select>
+	
+	<!-- 查稿件一条完整记录 -->
+	<select id="selectEssayById" parameterType="java.lang.String" resultMap="essayInfoMap">
+		SELECT tb_essay_info.*, tb_essay_status.*,tb_essay_style.*,tb_fund.*,tb_leaveMessage.*
+		FROM tb_essay_info 
+		LEFT JOIN tb_essay_style
+		ON tb_essay_info.styleId=tb_essay_style.styleId
+		LEFT JOIN tb_essay_status
+		ON tb_essay_info.statusId=tb_essay_status.statusId
+		LEFT JOIN tb_fund
+		ON tb_essay_info.essayId=tb_fund.essayId
+		LEFT JOIN tb_leaveMessage
+		ON tb_essay_info.essayId=tb_leaveMessage.essayId
+		WHERE tb_essay_info.essayId=#{essayId}
+	</select>
+	
+
+	<!-- 通过作者名查询所有稿件 -->
+	<select id="selectEssayByUsername" parameterType="java.lang.String"
+		resultMap="essayInfoMap">
+		SELECT tb_essay_info.*, tb_essay_status.*,tb_essay_style.*,tb_fund.*,tb_leaveMessage.*
+		FROM tb_essay_info 
+		LEFT JOIN tb_essay_style
+		ON tb_essay_info.styleId=tb_essay_style.styleId
+		LEFT JOIN tb_essay_status
+		ON tb_essay_info.statusId=tb_essay_status.statusId
+		LEFT JOIN tb_fund
+		ON tb_essay_info.essayId=tb_fund.essayId
+		LEFT JOIN tb_leaveMessage
+		ON tb_essay_info.essayId=tb_leaveMessage.essayId
+		
+		WHERE tb_essay_info.username like '%{username}%'
+	</select>
+
+	<!-- 通过稿件状态查询 所有相应稿件 -->
+	<select id="selectEssayByStatusId" parameterType="java.lang.Integer"
+		resultMap="essayInfoMap">
+		SELECT tb_essay_info.*, tb_essay_status.*,tb_essay_style.*,tb_fund.*,tb_leaveMessage.*
+		FROM tb_essay_info 
+		LEFT JOIN tb_essay_style
+		ON tb_essay_info.styleId=tb_essay_style.styleId
+		LEFT JOIN tb_essay_status
+		ON tb_essay_info.statusId=tb_essay_status.statusId
+		LEFT JOIN tb_fund
+		ON tb_essay_info.essayId=tb_fund.essayId
+		LEFT JOIN tb_leaveMessage
+		ON tb_essay_info.essayId=tb_leaveMessage.essayId
+		WHERE  tb_essay_info.statusId=#{statusId}
+	</select>
+
+	<!-- 作者添加稿件 -->
+	<insert id="insertEssay" parameterType="com.pxxy.handleMenuscript.bean.EssayInfo">
+		INSERT INTO tb_essay_info
+		<set>
+			<if test="essayId != null">
+				essayId=#{essayId},
+			</if>
+			<if test="title != null">
+				title=#{title},
+			</if>
+			<if test="etitle != null">
+				etitle=#{etitle},
+			</if>
+			<if test="username != null">
+				username=#{username},
+			</if>
+			<if test="styleId != null">
+				styleId=#{styleId},
+			</if>
+			<if test="abstracts != null">
+				abstracts=#{abstracts},
+			</if>
+			<if test="englishAbstract != null">
+				englishAbstract=#{englishAbstract},
+			</if>
+			<if test="keywords != null">
+				keywords=#{keywords},
+			</if>
+			<if test="englishKeywords != null">
+				englishKeywords=#{englishKeywords},
+			</if>
+			<if test="contributor != null">
+				contributor=#{contributor},
+			</if>
+			<if test="contributeDate != null">
+				contributeDate=#{contributeDate},
+			</if>
+			<if test="contentUrl != null">
+				contentUrl=#{contentUrl},
+			</if>
+			<if test="statusId != null">
+				statusId=#{statusId},
+			</if>
+			<if test="isContribute != null">
+				isContribute=#{isContribute},
+			</if>
+			<if test="reference != null">
+				reference=#{reference},
+			</if>
+			<if test="finishDate != null">
+				finishDate=#{finishDate}
+			</if>
+			<!-- <if test="fundId != null">
+				fundId=#{fundId}
+			</if> -->
+			
+		</set>
+	</insert>
+
+	<!-- 通过稿件编号更新稿件信息 -->
+	<update id="updateEssayById" parameterType="com.pxxy.handleMenuscript.bean.EssayInfo">
+		update tb_essay_info
+		<set>
+			<if test="title != null">
+				title=#{title},
+			</if>
+			<if test="etitle != null">
+				etitle=#{etitle},
+			</if>
+			<if test="username != null">
+				username=#{username},
+			</if>
+			<if test="styleId != null">
+				styleId=#{styleId},
+			</if>
+			<if test="abstracts != null">
+				abstracts=#{abstracts},
+			</if>
+			<if test="englishAbstract != null">
+				englishAbstract=#{englishAbstract},
+			</if>
+			<if test="keywords != null">
+				keywords=#{keywords},
+			</if>
+			<if test="englishKeywords != null">
+				englishKeywords=#{englishKeywords},
+			</if>
+			<if test="contributor != null">
+				contributor=#{contributor},
+			</if>
+			<if test="contributeDate != null">
+				contributeDate=#{contributeDate},
+			</if>
+			<if test="contentUrl != null">
+				contentUrl=#{contentUrl},
+			</if>
+			<if test="statusId != null">
+				statusId=#{statusId},
+			</if>
+			<if test="isContribute != null">
+				isContribute=#{isContribute},
+			</if>
+			<if test="reference != null">
+				reference=#{reference},
+			</if>
+			<if test="finishDate != null">
+				finishDate=#{finishDate}
+			</if>
+			
+		</set>
+		WHERE essayId=#{essayId}
+	</update>
+	<!-- 批量删除稿件 -->
+	<delete id="deleteEssayById" parameterType="String">
+		delete from tb_essay_info where essayId in
+        <foreach collection="array" item="essayId" open="(" separator="," close=")">   
+            #{essayId}   
+         </foreach>
+	</delete>
+	<!-- 批量更新稿件状态 -->
+	<update id="updateEssayIds" parameterType="String">
+		UPDATE tb_essay_info SET statusId = 61 where essayId in
+		<foreach collection="array" item="essayId" open="(" separator=","
+			close=")">
+			#{essayId}
+		</foreach>
+	</update>
+
+</mapper>

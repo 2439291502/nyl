@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> -->
+<mapper namespace="com.pxxy.handleMenuscript.mapper.ContributeEssayMapper">
+	<!-- 用户信息resultMapper -->
+	<resultMap id="userInfoMap" type="com.pxxy.handleMenuscript.bean.UserInfo">
+		<id property="userId" column="userId" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="tureName" column="tureName" />
+		<result property="email" column="email" />
+		<result property="sex" column="sex" />
+		<result property="profession" column="profession" />
+		<result property="research" column="research" />
+		<result property="postId" column="postId" />
+		<result property="eBackgroundId" column="eBackgroundId" />
+		<result property="workUnit" column="workUnit" />
+		<result property="address" column="address" />
+		<result property="postcode" column="postcode" />
+		<result property="phone" column="phone" />
+		<result property="telephone" column="telephone" />
+		<result property="applyExpert" column="applyExpert" />
+		<result property="createData" column="createData" />
+		<result property="updateDate" column="updateDate" />
+		<result property="typeId" column="typeId" />
+		<result property="state" column="state" />
+		<!-- 学历 -->
+		<association property="eBackground"
+			javaType="com.pxxy.handleMenuscript.bean.EBackground">
+			<id property="eBackgroundId" column="eBackgroundId" />
+			<result property="eBackgroundName" column="eBackgroundName" />
+		</association>
+		<!-- 职称 -->
+		<association property="post"
+			javaType="com.pxxy.handleMenuscript.bean.Post">
+			<id property="postId" column="postId" />
+			<result property="postName" column="postName" />
+		</association>
+		<!-- 用户类型 -->
+		<association property="type"
+			javaType="com.pxxy.handleMenuscript.bean.Type">
+			<id property="typeId" column="typeId" />
+			<result property="typeLevel" column="typeLevel" />
+		</association>
+	</resultMap>
+
+
+	<!-- 分配稿件contributeEssayMap -->
+	<resultMap type="com.pxxy.handleMenuscript.bean.ContributeEssay" id="contributeEssayMap">
+		<id property="contributeId" column="contributeId" />
+		<result property="editorId" column="editorId" />
+		<result property="essayId" column="essayId" />
+		<result property="checkUserId" column="checkUserId" />
+		<result property="contributeDate" column="contributeDate" />
+		<!-- 分配稿件1-1稿件信息表 -->
+		<association property="essay" javaType="com.pxxy.handleMenuscript.bean.EssayInfo">
+			<id property="essayId" column="essayId" />
+			<result property="title" column="title" />
+			<result property="etitle" column="etitle" />
+			<result property="username" column="username" />
+			<result property="styleId" column="styleId" />
+			<result property="abstracts" column="abstracts" />
+			<result property="englishAbstract" column="englishAbstract" />
+			<result property="keywords" column="keywords" />
+			<result property="englishKeywords" column="englishKeywords" />
+			<result property="contributor" column="contributor" />
+			<result property="contributeDate" column="contributeDate" />
+			<result property="contentUrl" column="contentUrl" />
+			<result property="statusId" column="statusId" />
+			<result property="isContribute" column="isContribute" />
+			<result property="reference" column="reference" />
+			<!-- <result property="finishDate" column="finishDate"/> -->
+			<result property="finishDate" column="finishDate" />
+			<!-- 稿件信息1-1稿件类型表 -->
+			<association property="essayStyle"
+				javaType="com.pxxy.handleMenuscript.bean.EssayStyle">
+				<id property="styleId" column="styleId" />
+				<result property="styleName" column="styleName" />
+			</association>
+		</association>
+		<!-- 评语表 1-n -->
+		<collection property="eCommentList" ofType="com.pxxy.handleMenuscript.bean.EssayComment">
+			<id column="commentId" property="commentId"></id>
+			<result column="essayId" property="essayId"></result>
+			<result column="cUsernameId" property="cUsernameId"></result>
+			<result column="designCommentId" property="designCommentId"></result>
+			<result column="contentCommentId" property="contentCommentId"></result>
+			<result column="dataCommentId" property="dataCommentId"></result>
+			<result column="discussCommentId" property="discussCommentId"></result>
+			<result column="resultCommentId" property="resultCommentId"></result>
+			<result column="commentDetails" property="commentDetails"></result>
+			<result column="commentLevel" property="commentLevel"></result>
+			<result column="commentDate" property="commentDate"></result>
+			<!-- 评审内容 -->
+			
+		</collection>
+
+	</resultMap>
+
+	<!-- 稿件信息分配表tb_essay_contribute -->
+	<!-- 添加分配稿件信息 -->
+	<insert id="insertContributeEssay" parameterType="com.pxxy.handleMenuscript.bean.ContributeEssay">
+		INSERT into tb_essay_contribute
+		<set>
+			<if test="contributeId != null">
+				contributeId=#{contributeId},
+			</if>
+			<if test="editorId != null">
+				editorId=#{editorId},
+			</if>
+			<if test="essayId != null">
+				essayId=#{essayId},
+			</if>
+			<if test="checkUserId != null">
+				checkUserId=#{checkUserId},
+			</if>
+			<if test="contributeDate != null">
+				contributeDate=#{contributeDate}
+			</if>
+		</set>
+	</insert>
+	<update id="updateContributeById" parameterType="com.pxxy.handleMenuscript.bean.ContributeEssay">
+		UPDATE tb_essay_contribute
+		<set>
+			<if test="editorId != null">
+				editorId=#{editorId},
+			</if>
+			<if test="essayId != null">
+				essayId=#{essayId},
+			</if>
+			<if test="checkUserId != null">
+				checkUserId=#{checkUserId},
+			</if>
+			<if test="contributeDate != null">
+				contributeDate=#{contributeDate}
+			</if>
+		</set>
+		WHERE contributeId=#{contributeId}
+	</update>
+
+	<delete id="delectContributeById" parameterType="String">
+		delete from tb_essay_contribute where contributeId in
+		<foreach collection="array" item="contributeId" open="("
+			separator="," close=")">
+			#{contributeId}
+		</foreach>
+	</delete>
+
+	<!-- 查询分配稿件信息 根据稿件Id -->
+	<select id="selectContributeById" parameterType="String"
+		resultType="com.pxxy.handleMenuscript.bean.ContributeEssay">
+		SELECT
+		tb_essay_contribute.*
+		FROM
+		tb_essay_contribute
+		WHERE tb_essay_contribute.essayId=#{essayId}
+	</select>
+
+
+
+
+
+
+
+
+
+	<!-- 查询专家用户信息 通过专业领域 -->
+	<select id="selectUserByProfession" resultMap="userInfoMap">
+		SELECT
+		tb_user_info.*,
+		tb_user_type.*,
+		tb_user_post.*,
+		tb_user_educatebackground.*
+		FROM tb_user_info
+
+		LEFT JOIN tb_user_type
+		ON
+		tb_user_info.typeId=tb_user_type.typeId
+		LEFT JOIN
+		tb_user_post
+		ON
+		tb_user_info.postId=tb_user_post.postId
+		LEFT JOIN
+		tb_user_educatebackground
+		ON
+		tb_user_info.eBackgroundId=tb_user_educatebackground.eBackgroundId
+		WHERE
+		tb_user_info.profession=#{profession}
+		AND tb_user_info.state=1
+		AND
+		(tb_user_info.typeId=20
+		OR tb_user_info.typeId=21
+		OR
+		tb_user_info.typeId=22)
+	</select>
+	<!-- 查询已分配稿件信息 -->
+	<select id="selectContributeEssay" resultMap="contributeEssayMap">
+		SELECT
+		tb_essay_contribute.*,
+		tb_essay_info.*,
+		tb_essay_style.*,
+		tb_essay_comment.*
+		FROM
+		tb_essay_contribute
+		LEFT JOIN tb_essay_info
+		ON tb_essay_contribute.essayId=tb_essay_info.essayId
+		LEFT JOIN tb_essay_style
+		ON tb_essay_info.styleId=tb_essay_style.styleId
+		LEFT JOIN tb_essay_comment
+		ON tb_essay_info.essayId=tb_essay_comment.essayId
+		<!-- WHERE tb_essay_contribute.essayId=#{essayId} -->
+	</select>
+	<!-- 专家操作分配表 -->
+	<!-- 专家查询所有需审核的稿件 userId -->
+	<select id="selectEssayByUserId" resultMap="contributeEssayMap">
+		SELECT
+		tb_essay_contribute.* ,
+		tb_essay_info.*,
+		tb_essay_style.*
+		FROM
+		tb_essay_contribute
+		LEFT JOIN
+		tb_essay_info
+		ON
+		tb_essay_contribute.essayId=tb_essay_info.essayId
+		LEFT
+		JOIN
+		tb_essay_style
+		ON tb_essay_info.styleId=tb_essay_style.styleId
+		WHERE
+		tb_essay_contribute.checkUserId=#{checkUserId}
+		AND
+		tb_essay_info.statusId=#{statusId}
+	</select>
+
+</mapper>

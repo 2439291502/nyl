@@ -1,0 +1,25 @@
+@charset "UTF-8";
+/*==============================指南详情内容页css===================================*/
+			
+			.content_guide_details {
+				width: 760px;
+				height: 800px;
+				overflow-y: auto;
+				overflow-x:hidden;
+				border: 1px solid red;
+				margin-left: 15px;
+			}
+			
+			.guide_title {
+				width: 760px;
+				height: 35px;
+				background-color: rgba( 255, 250, 240, 0.5);
+			}
+			.guide_content{
+				padding: 20px;
+			}
+			.guide_content p {
+				text-indent: 5px;
+				padding: 8px;
+				line-height: 25px;;
+			}

@@ -1,0 +1,69 @@
+@charset "UTF-8";
+* {
+
+    margin: 0px;
+    padding: 0px;
+    align:center;
+    font-size:14px;
+
+}
+.examine_f{
+	
+}
+.examine_f table th,td{
+	line-height:50px;
+}
+
+.examine_title{
+	
+}
+/**/
+.examine_essayinfo{
+	margin-bottom: 40px;
+}
+
+.examine_essayinfo table th,td{
+	line-height:38px;
+}
+
+/**/
+.examine_table{
+	/* height:300px;
+	border: #6f6f6f solid 1px; */
+	
+}
+.examine_table h3{
+	overflow: hidden;
+    color: #6c9dbc;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+    line-height: 30px;
+    padding: 0 12px;
+    width: 776px;
+	background: #eee;
+
+}
+
+.examine_table table{
+	width:100%;
+	border-collapse: collapse;
+	border: #c9dedd solid 1px;
+	
+}
+.examine_table table td,th{
+	border-right: #d3d3d3 solid 1px;
+	border-bottom: #d3d3d3 solid 1px;
+	align:center;
+}
+a{
+	cursor: pointer;
+	text-decoration:none;
+	 
+}
+a:hover {
+
+    color: #2678ac;
+    text-decoration: underline;
+
+}
+
